@@ -1,2 +1,2 @@
 # TIL-public
-Today I Learned public version
+Today I Learned(public)
