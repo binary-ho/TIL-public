@@ -34,3 +34,7 @@ int[][] arr = new int[5][3];
 __다차원 배열은 배열의 각 원소가 또 배열을 가지는 식이다.__ (배열의 배열)
 __arr가 참조하는 배열의 원소의 수는 5이므로, `arr.length`의 결과는 5가 된다.__
 당연하지만 `arr[0].length`의 결과는 3이다.
+
+### 4. Vector는 이제 없는거지?
+**`Vector` 대신 `ArrayList`를 써라!** `Vector는` 호환상 명목상으로 남아 있는 거고, `ArrayList`가 대체할 수 있다.    
+`Vector`를 개선하기 위해 만든 것이 `ArrayList!`    다만 C++과는 달리 `vector[idx]` 와 같은 get과 set은 어렵다. get(), set() 메소드를 이용하여야 한다.
