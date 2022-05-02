@@ -1,4 +1,4 @@
-Input & Output (Algorithm with Java)
+Input & Output (for Algorithm with Java)
 ==
 
 답답해서 내가 쓴다.
