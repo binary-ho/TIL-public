@@ -1,4 +1,4 @@
-Data Structure for - Algorithm with Java
+Data Structure - for Algorithm with Java
 ==
 
 항상 C++만 이용하여 PS를 하느라 Java를 이용한 알고리즘 문제를 풀이에는 매우 약하다.    
