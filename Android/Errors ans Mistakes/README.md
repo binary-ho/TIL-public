@@ -4,9 +4,9 @@ Errors ans Mistakes
 
 1. id 찾을 때  container을 자동 완성 때문에 constraint로 적을 때가 의외로 많다, 조심
 2. @Override에 에러가 뜨면 보통 이름을 잘못 쓴 것.
-    
+3. 
 ![override error.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/0c9c918f-0b3d-477e-bf93-0ce4f2eb1de0/override_error.png)
-    
+
 
 # 3. implements 밑줄
 
