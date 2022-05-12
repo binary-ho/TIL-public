@@ -35,3 +35,6 @@ Chapter 1. Layout 요약
 
 ### 7. 앱 메인 화면인 MainActivity.java는 자동으로 만들어지고, 이는 AndroidManifest.xml 안에 자동으로 등록됨. 그러니까 메인을 바꿔주고 싶으면, manifests폴더 뒤져서 코드 수정해주면 됨.
 <br/>
+
+### 8. Layout 만드는 Code
+[Layout Code 바로 가기](https://github.com/binary-ho/TIL-public/blob/main/Android/%5B%EC%B1%85%5D%20Do%20it%20%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C%20%EC%95%B1%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/1.%20Layout/Layout%20Code.md) -> 여러번 읽어 보자.
