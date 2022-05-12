@@ -1,4 +1,4 @@
-Ch 1. Layout 요약
+Chapter 1. Layout 요약
 ========
 
 
