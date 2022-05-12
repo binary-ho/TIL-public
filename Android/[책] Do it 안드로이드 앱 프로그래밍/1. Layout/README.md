@@ -15,8 +15,8 @@ Ch 1. Layout 요약
 배경으로서 불러 올 때의 예시: android:background="@drawable/house" 이런식. 확장자 이름은 빼.
 4. 레이아웃 종류
     
-    ![layout.PNG](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/bc8f1afc-0878-435d-8a01-92ef3d72abfe/layout.png)
-    
+![image](https://user-images.githubusercontent.com/71186266/167997951-62fdd61c-4e8f-4866-8531-b998776e90e7.png)
+
 5. 레이아웃 필수 속성 - 레이아웃은 필수 속성이 있음.
 예를 들어 리니어 레이아웃은 한 쪽 방향으로만 뷰가 쌓이므로, 어느 방향으로 배치할 것인지를 지정하는 orientation 속성이 필수임. 다른 애들은 layout_width, height등이 필요.
 파라미터도 설정 해 줘라 parms → width, height 정해주는 거
