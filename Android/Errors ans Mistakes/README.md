@@ -12,7 +12,7 @@ Errors ans Mistakes
 
 ![image](https://user-images.githubusercontent.com/71186266/167997346-9b6fbb16-2d7e-4e74-9dc9-a22aa4f268fb.png)
 
-그림은 안 그런데 [com.android.support](http://com.android.support) 붙은 애들 죄다 빨간줄 천지였다.
+그림은 안 그런데 `com.android.support` 붙은 요소들이 죄다 빨간줄 천지였다.
 
 뭘 해도 해결이 안 됐었는데,
 
