@@ -48,7 +48,7 @@ Padding - View 테두리와 content 사이 거리
 ![image](https://user-images.githubusercontent.com/71186266/167998793-76ac1673-772d-4581-9aec-1683c50f7f33.png)
 
 
-### 1.10 [프레임뷰](https://github.com/binary-ho/TIL-public/blob/main/Android/%5B%EC%B1%85%5D%20Do%20it%20%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C%20%EC%95%B1%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/1.%20Layout/Frame%20View.md)
+### 1.10 [Frame Layout](https://github.com/binary-ho/TIL-public/blob/main/Android/%5B%EC%B1%85%5D%20Do%20it%20%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C%20%EC%95%B1%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/1.%20Layout/Frame%20View.md)
 
     
-### 1.11 [스크롤 뷰](https://github.com/binary-ho/TIL-public/blob/main/Android/%5B%EC%B1%85%5D%20Do%20it%20%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C%20%EC%95%B1%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/1.%20Layout/Scroll%20View.md)  -> 파라미터를 항상 설정 해줘야함에 주의할 것.
+### 1.11 [Scroll View](https://github.com/binary-ho/TIL-public/blob/main/Android/%5B%EC%B1%85%5D%20Do%20it%20%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C%20%EC%95%B1%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/1.%20Layout/Scroll%20View.md)  -> 파라미터를 항상 설정 해줘야함에 주의할 것.
