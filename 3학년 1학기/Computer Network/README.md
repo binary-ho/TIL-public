@@ -14,6 +14,7 @@ Computer Network 과목은 Compter Network와 TCP/IP 통신에 대해 공부하�
 ## [5. Classless Addressing](https://github.com/binary-ho/TIL-public/blob/main/3%ED%95%99%EB%85%84%201%ED%95%99%EA%B8%B0/Computer%20Network/5.%20Classless%20Addressing.md)
 #### 5.5 Special Addresses와 5.6 NAT는 따로 문서를 만들었습니다. - [Special Addresses and NAT](https://github.com/binary-ho/TIL-public/blob/main/3%ED%95%99%EB%85%84%201%ED%95%99%EA%B8%B0/Computer%20Network/Special%20Addresses%20and%20NAT.md)
 ## [6. Delivery and Forwarding of IP Packets](https://github.com/binary-ho/TIL-public/blob/main/3%ED%95%99%EB%85%84%201%ED%95%99%EA%B8%B0/Computer%20Network/6.%20Delivery%20and%20Forwarding.md)
+#### 라우팅 문제는 여러번 풀어봐야 합니다! - [라우팅 문제 모음 문서 바로가기](https://github.com/binary-ho/TIL-public/blob/main/3%ED%95%99%EB%85%84%201%ED%95%99%EA%B8%B0/Computer%20Network/Routing%20%EB%AC%B8%EC%A0%9C%20%EB%AA%A8%EC%9D%8C.md)
 ## [7. Internet Protocol Ver.4 - IPv4](https://github.com/binary-ho/TIL-public/blob/main/3%ED%95%99%EB%85%84%201%ED%95%99%EA%B8%B0/Computer%20Network/7.%20IPv4.md)
 ## [8. Address Resolution Protocol - ARP](https://github.com/binary-ho/TIL-public/blob/main/3%ED%95%99%EB%85%84%201%ED%95%99%EA%B8%B0/Computer%20Network/8.%20ARP.md)
 ## [9. Internet Control Message Protocol - ICMPv4](https://github.com/binary-ho/TIL-public/blob/main/3%ED%95%99%EB%85%84%201%ED%95%99%EA%B8%B0/Computer%20Network/9.%20ICMPv4.md)
