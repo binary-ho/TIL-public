@@ -12,7 +12,7 @@ Computer Network 과목은 Compter Network와 TCP/IP 통신에 대해 공부하�
 ## [3. Introduction to Network Layer](https://github.com/binary-ho/TIL-public/blob/main/3%ED%95%99%EB%85%84%201%ED%95%99%EA%B8%B0/Computer%20Network/3.%20Network%20Layer.md)
 ## [4. IPv4 Addresses](https://github.com/binary-ho/TIL-public/blob/main/3%ED%95%99%EB%85%84%201%ED%95%99%EA%B8%B0/Computer%20Network/4.%20IPv4%20Addresses.md)
 ## [5. Classless Addressing](https://github.com/binary-ho/TIL-public/blob/main/3%ED%95%99%EB%85%84%201%ED%95%99%EA%B8%B0/Computer%20Network/5.%20Classless%20Addressing.md)
-### - [5.5 Special Addresses](https://github.com/binary-ho/TIL-public/new/main/3%ED%95%99%EB%85%84%201%ED%95%99%EA%B8%B0/Computer%20Network)
+### - [5.5 Special Addresses](https://github.com/binary-ho/TIL-public/blob/main/3%ED%95%99%EB%85%84%201%ED%95%99%EA%B8%B0/Computer%20Network/5.5%20Special%20Addresses.md)
 ## [6. Delivery and Forwarding of IP Packets](https://github.com/binary-ho/TIL-public/blob/main/3%ED%95%99%EB%85%84%201%ED%95%99%EA%B8%B0/Computer%20Network/6.%20Delivery%20and%20Forwarding.md)
 ## [7. Internet Protocol Ver.4 - IPv4](https://github.com/binary-ho/TIL-public/blob/main/3%ED%95%99%EB%85%84%201%ED%95%99%EA%B8%B0/Computer%20Network/7.%20IPv4.md)
 ## [8. Address Resolution Protocol - ARP](https://github.com/binary-ho/TIL-public/blob/main/3%ED%95%99%EB%85%84%201%ED%95%99%EA%B8%B0/Computer%20Network/8.%20ARP.md)
