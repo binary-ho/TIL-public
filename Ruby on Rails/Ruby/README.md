@@ -54,8 +54,8 @@ array = ['a', 'b', 'c', 'd', 'e']
 번외로 넣은 아래 `(0..10).to_a`는 to array라는 의미로 `range`로 array를 만들어준 모습니다. <br/>
 
 ### array 곱하기 연산이 가능합니다.
-곱해준 숫자 만큼 모든 원소를 복사해서 뒤에 붙여줍니다.
-![multiplyarray](https://user-images.githubusercontent.com/71186266/169442086-b852f7b5-2fac-4654-b8cb-8fa0b77194bf.PNG)
+곱해준 숫자 만큼 모든 원소를 복사해서 뒤에 붙여줍니다. <br/>
+![multiplyarray](https://user-images.githubusercontent.com/71186266/169442086-b852f7b5-2fac-4654-b8cb-8fa0b77194bf.PNG) <br/>
 위와 같이 사용하면 됩니다.
 
 5. **Hash: key-value mapping 자료구조. 중괄호로 선언합니다. key-value 매칭하는 방법이 2지 있습니다.**
