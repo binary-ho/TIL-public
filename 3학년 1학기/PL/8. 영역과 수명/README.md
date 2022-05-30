@@ -100,7 +100,8 @@ ex) if-fi, then-else, else-fi, begin-end, loop-pool, case-esac 등 다양한 블
 
 ### 2. Algol 60
 - 변수 수명: 블록 시작~끝
-- own 변수: static 변수 수명이 주 프로시저 시작~끝
+- own 변수: 정적 할당, static 변수 수명이 주 프로시저 시작~끝
+- 나머지 변수들은 스택 기반 동적 할당이다. 변수의 크기가 실행시 할당 후, 고정된다.
 
 ### 3. PL/1
 |type|수명|
@@ -117,4 +118,14 @@ C++: new ~ delete <br>
 Pascal: new() ~ dispose() <br>
 PL/1: ALLOCATE() ~ FREE() <br>
 
-Fortran, Algol 60은 정적 수명 개념을 이용하는 것 같다.
+
+## 수명과 기억장소 할당 정리
+|기억장소 할당|정적 할당|Stack 기반(동적)|Heap 기반(동적)|
+|:----:|:----:|:----:|:----:|
+|Fortran|변수 수명 = 프로그램 수명|X|X|
+|ALGOL 60|own 변수|X|이외의 모든 변수 - 재귀 허용|
+|PL/1|STATIC|AUTOMATIC|CONTROLLED, BASED|
+|C, C++, JAVA|static|auto(default)|malloc-free, new-delete, new|
+
+
+
