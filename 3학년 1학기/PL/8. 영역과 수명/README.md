@@ -92,9 +92,10 @@ ex) if-fi, then-else, else-fi, begin-end, loop-pool, case-esac 등 다양한 블
   
 ## 동적 수명 개념 ⭐
 별거 없고 힙 사용한건데
-C: malloc() ~ free() 이런거다.
-C++: new ~ delete
-Pascal: new() ~ dispose()
-PL/1: ALLOCATE() ~ FREE()
+C: malloc() ~ free() 이런거다. <br>
+C++: new ~ delete <br>
+Pascal: new() ~ dispose() <br>
+PL/1: ALLOCATE() ~ FREE() <br>
+
 
 # 8.5 Ada에서의 영역과 수명
