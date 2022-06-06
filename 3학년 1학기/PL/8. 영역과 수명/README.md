@@ -124,7 +124,7 @@ PL/1: ALLOCATE() ~ FREE() <br>
 |:----:|:----:|:----:|:----:|
 |Fortran|변수 수명 = 프로그램 수명|X|X|
 |ALGOL 60|own 변수|X|이외의 모든 변수 - 재귀 허용|
-|PL/1|STATIC|AUTOMATIC|CONTROLLED, BASED|
+|PL/1|STATIC|AUTOMATIC, BASED|CONTROLLED |
 |C, C++, JAVA|static|auto(default)|malloc-free, new-delete, new|
 
 
