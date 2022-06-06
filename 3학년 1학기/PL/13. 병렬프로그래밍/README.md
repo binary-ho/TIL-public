@@ -10,6 +10,11 @@
 4. MIMD: 진정한 parallel processing programing
 **-> 병렬 처리 컴퓨터는 SIMD, MIMD, 결국 mulit-data**
 
+## 자료 공유 방식
+- 공유 메모리 구조(shared-memory architecture): 큰 거 하나를 공유하자!
+- 분산 메모리 구조(distributed-memory architecture): 프로세스마다 데이터를 주자.
+
+
 ## 13.2 병렬 처리와 프로그램 언어
 <**주요 키워드**>
 - Shared resource
