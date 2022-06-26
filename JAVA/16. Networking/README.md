@@ -110,4 +110,4 @@ URLConnection을 통해 어플리케이션과 URL간 통신이 가능하다. URL
 
 
 # 2. 소켓 프로그래밍
-파일 내 다른 문서에 따로 작성
+![바로가기](https://github.com/binary-ho/TIL-public/tree/main/JAVA/16.%20Networking/TCP%20%EC%86%8C%EC%BC%93%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D)
