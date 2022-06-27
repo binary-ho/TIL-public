@@ -43,3 +43,8 @@ java 파일을 컴파일하고 실행할 때, `java Main.java`와 같은 명령�
 ![done](https://user-images.githubusercontent.com/71186266/175864149-7eb7c0ec-d58b-4ec8-9e24-895e33d6ed0a.png)
 
 지금까지 연관된 자바 파일들을 cannot symbol error 없이 컴파일 하고 실행하는 방법을 소개하였습니다. 읽어주셔서 감사합니다. 
+
+## 참고
+https://kirkim.github.io/java/2021/05/12/java_compile.html
+https://velog.io/@solar/Java-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%ED%84%B0%EB%AF%B8%EB%84%90%EC%97%90%EC%84%9C-javac%EB%A1%9C-%EC%BB%B4%ED%8C%8C%EC%9D%BC-%ED%9B%84-%EC%8B%A4%ED%96%89-%EA%B3%BC%EC%A0%95%EC%97%90%EC%84%9C-%EB%B0%9C%EC%83%9D%ED%95%9C-%EC%98%A4%EB%A5%98-%ED%95%B4%EA%B2%B0
+https://zincod.tistory.com/139
