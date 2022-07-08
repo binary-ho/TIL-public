@@ -189,5 +189,15 @@ footer {
 ```
 부유객체를 만들기 위해 (본문은 안 가리는데, Aside 보다는 앞에 있어야함.) `position: absolute;`
 
+# 4. Responsive Web Design 
+
+### label 요소로 input 요소 클릭하기
+```html
+<label for="remeber-pw">Remeber password?</label>
+<input type="checkbox" name="remeber-pw" id="remeber-pw">
+```
+**input checkbox 요소의 id 값과 label 요소의 for 값을 일치시키면, label 요소를 클릭해도 input checkbox 요소가 클릭된다.**
+
 # Reference
 (https://poiemaweb.com/css3-layout)
+
