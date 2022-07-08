@@ -165,3 +165,29 @@ h1, h2, h3, h4, h5, h6, p {
     margin: 10px 5px;
 }
 ```
+
+## 3. footer
+footer는 **absolute 프로퍼티**를 설정합니다. 고정되어 있을 필요가 있지만, 본문을 가리지 않아야 합니다. 그래서 fixed는 안 되고, 다른 요소가 먼저 위치를 점유하고 있어도 밀리지 않는 부유객체로 설정을 해 주어야 합니다.  (aside와 같은 요소들 보다는 위에 있어야하기 위함) 그래서 absolute를 씁니다.
+
+```html
+    </div>
+    <footer> Copyright 어쩌고 저쩌고</footer>
+</body>
+```
+맨 아래에 둡니다. div 아래 (당연)
+```css
+footer {
+    position: absolute;
+    height: 60px;
+    width: 100%;
+    padding: 0 25px;
+    line-height: 60px;
+    color: #8a8c8f;
+    border-top: 1px solid #dee5e7;
+    background-color: #f2f2f2;
+}
+```
+부유객체를 만들기 위해 (본문은 안 가리는데, Aside 보다는 앞에 있어야함.) `position: absolute;`
+
+# Reference
+(https://poiemaweb.com/css3-layout)
