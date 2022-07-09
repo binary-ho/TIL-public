@@ -11,4 +11,8 @@ BitBucket에서 private repository를 SSH 방식으로 clone해오는 과정에�
 정리하고 보니 너무 허무하지만, 사장님과 개발 팀장님 앞에서 빠르게 해결하려다 보니, 꽤나 머리아픈 일이였다. <br>
 자세한 설명은 아래 블로그에서 볼 수 있다. 정말 많은 블로그를 참고했지만 아래의 블로그에서 제시한 방법이 먹혀들었다. 무한한 감사를 보낸다..
 
+```
+$ eval $(ssh-agent)
+```
+
 https://beagle-dev.tistory.com/185
