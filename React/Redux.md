@@ -38,7 +38,10 @@ console.log(decrement(1));
 ```
 
 ## 2. Reducer
-상태에 **변화**를 일으키는 함수입니다. 두 개의 파라미터를 받는데, 첫 번째 파라미터는 현재의 상태이고, 두 번째 파라미터는 액션 객체입니다. 리듀서가 첫 번째 파라미터에서 사용할 초기 상태 `initalState`의 값을 먼저 설정해 주어야 리듀서를 만들 수 있습니다. <br> 함수 내부에서 switch 문을 사용하여 action.type에 따라 새로운 상태를 만들어 반환해야합니다. switch문에서 스코프를 리듀서 함수 이름으로 사용 하기 때문에, 서로 다른 case에서 변수를 선언하거나 할 때 문제가 발생할 수 있습니다. 이는 나중에 리덕스-액션의 `handelAction`을 이용하여 해결할 수 있습니다.
+상태에 **변화**를 일으키는 함수입니다. 두 개의 파라미터를 받는데, 첫 번째 파라미터는 현재의 상태이고, 두 번째 파라미터는 액션 객체입니다. 리듀서가 첫 번째 파라미터에서 사용할 초기 상태 `initalState`의 값을 먼저 설정해 주어야 리듀서를 만들 수 있습니다. <br> 함수 내부에서 switch 문을 사용하여 action.type에 따라 새로운 상태를 만들어 반환해야합니다. switch문에서 스코프를 리듀서 함수 이름으로 사용 하기 때문에, 서로 다른 case에서 변수를 선언하거나 할 때 문제가 발생할 수 있습니다. 이는 나중에 리덕스-액션의 `handelAction`을 이용하여 해결할 수 있습니다. 
+<br> <br>
+
+리덕스에서 상태를 업데이트 할 때는 컴포넌트의 state를 다룰 때 처럼 **값을 직접 수정 해서는 안 된다.** 새로운 객체를 만든 다음 덮어 씌워주는 식이다. 그 결과 값이 여러개인 경우 아래와 같은 구현이 된다.
 
 ```js
 // 초기값 설정
@@ -63,4 +66,66 @@ function counter(state = initialState, action) {
       return state;
   }
 }
+```
+위와 같이 `{} -> state -> 덮어 쓸 부분` 순서로 객체를 만들고 덮어 씌워 줍니다. 좀 더 ES6 적인 코드로 나타내면..
+```jsx
+function counter(state = initialState, action) {
+  switch(action.type) {
+    case INCREMENT:
+      return {
+        ...state,
+        number: state.number + action.diff
+      };
+    case DECREMENT:
+      return {
+        ...state,
+        number: state.number - action.diff
+      };
+    default:
+      return state;
+  }
+}
+```
+한개일 경우에는 아래와 같이 간단히 나타냅니다.
+```js
+function counter(state = initialState, action) {
+  switch(action.type) {
+    case INCREMENT:
+      return { number: state.number + action.diff };
+    case DECREMENT:
+      return { number: state.number - action.diff };
+    default:
+      return state;
+  }
+}
+```
+
+# 3. Store!
+스토어를 만듭니다. 만들고 불러오는 코드는 아래와 같습니다.
+```js
+// 만들 때
+const { createStore } = Redux;
+const store = createStore(counter);
+// createStroe(리듀서 함수, 스토어 기본 값)
+
+
+// 불러 올 때
+import { createStore } from 'redux';
+```
+
+### 컴포넌트에서 스토어 구독 하기
+내장함수 `subscribe` 혹은 `connect`함수
+```js
+const unsubscribe = store.subscribe(() => {
+  console.log(store.getState()) // 현재 스토어 상태 반환
+});
+```
+
+
+### 디스패치로 액션 전달하기
+`store.dispatch` 함수로 스토어에 액션을 넣어보세요
+```js
+store.dispatch(리듀서 함수);
+store.dispatch(리듀서 함수);
+store.dispatch(리듀서 함수);
 ```
