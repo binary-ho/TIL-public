@@ -14,3 +14,8 @@ npx create-react-app 프로젝트명
 cd 프로젝트명
 yarn start
 ```
+## export vs default export
+
+1. export는 해당 모듈에서 내보낼 함수나 요소를 지정하는 것이다. <br> import 해올 때 정확한 요소 이름을 지정해야한다.
+2. default export는 다르다. 해당 모듈을 가져오면 기본적으로 불려오는 것이 바로 default export로 지정한 요소이다. (정확히는 그 중 첫 번째 것). <br>
+그래서 우리가 쓸 때 `import * as 뭐뭐 from 모듈`과 같이도 쓸 수 있다.
