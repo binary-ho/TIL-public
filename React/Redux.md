@@ -129,3 +129,6 @@ store.dispatch(리듀서 함수);
 store.dispatch(리듀서 함수);
 store.dispatch(리듀서 함수);
 ```
+
+# reference
+리액트를 다루는 기술 <김민준 저>
