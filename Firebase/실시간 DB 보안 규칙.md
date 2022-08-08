@@ -109,3 +109,39 @@ firebase의 실시간 데이터베이스 규칙은 JSON 구조에서 자바스�
 ```
 
 # 3. 보안 규칙 작동 방식
+**firebase의 실시간 데이터베이스의 rule은 원자적으로 적용됩니다.** 즉, 상위 노드의 규칙이 하위 노드의 규칙에 우선하며, 하위 노드는 상위 경로에 엑세스를 허용할 수 없습니다. 
+<br> 이에 대한 이해가 부족하면 다음과 같은 실수를 범할 수 있습니다.
+```json
+{
+  "rules": {
+    "records": {
+      "rec1": {
+        ".read": true
+      },
+      "rec2": {
+        ".read": false
+      }
+    }
+  }
+}
+```
+위와 같이 규칙을 작성한 다음 `records`를 가져오면, rec1만 가져와지고 rec2는 가져와지지 않겠지? 라고 생각할 수 있습니다. 하지만 `PERMISSION_DENIED`오류가 발생합니다. 이는 **`records`의 아래의 모든 데이터에 대한 액세스 권한을 부여하는 규칙이 없기 때문입니다.**  <br> 따라서 아래와 같은 접근이 불가능합니다.
+```js
+var db = firebase.database();
+db.ref("records").once("value", function(snap) {
+  // success method is not called
+}, function(err) {
+  // error callback triggered with PERMISSION_DENIED
+});
+```
+반면 아래와 같은 접근은 가능합니다.
+```js
+var db = firebase.database();
+db.ref("records/rec1").once("value", function(snap) {
+  // SUCCESS!
+}, function(err) {
+  // error callback is not called
+});
+```
+이런 식으로 **원자적으로** 적용된다는 점을 이해하고 있어야합니다.
+<br> 단, `validate` 규칙은 하위로 전파되지 않습니다. 계층구조의 모든 수준에서 검증 규칙을 적용 시켜줄 수 있습니다. (물론 모두 만족해야합니다.)
