@@ -34,6 +34,17 @@ p.then(onSuccess)
 ```
 마지막은 체이닝을 한 모습입니다. 기존의 지옥 같은 콜백함수 문제점(?)들을 해결 하기 위해 저런 식으로 체이닝을 했었습니다. 하지만 지금은 더 나은 방법인 `async/await` 방식이 권장된다고 합니다.
 
+<br> <br>
+프로미스 체이닝은 아래와 같이도 가능합니다.
+
+```js
+promiseObject()
+  .then(foo())
+  .then(foo2())
+  .then(foo3())
+  .catch(console.error);
+```
+
 ## `async/await`
 Promise를 더 편하게 쓸 수 있는 방법입니다. 단순해 보이는 기능이지만, Promise를 주류로 만들어준 1등 공신이 바로 `async/await`입니다. 꼭 Promise를 써야만 `async/await`를 이용할 수 있기 때문입니다. 이게 왜 좋은걸까요? **바로 비동기적인 코드를 동기적으로 보이게 만들어주기 때문입니다.** 기존의 Promise를 적용한 코드는 아래와 같았습니다.
 ```js
@@ -107,3 +118,6 @@ async function run() {
 }
 run();
 ```
+
+## Reference
+https://poiemaweb.com/es6-promise
