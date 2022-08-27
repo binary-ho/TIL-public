@@ -24,3 +24,45 @@ Windows에서는 그냥 SSH로 접속하기에는 불편함이 많습니다. 그
 
 <br> <br>
 
+1. puttygen을 실행해서 import key로 pem 파일을 엽니다. 
+2. 이후 save private key를 눌러 ppk 파일을 생성합니다.
+3. putty 클라이언트를 실행합니다. ec2 아마존 리눅스의 경우 Host Name이 `ec2-user`입니다. Host Name에 `ec2-user@${EIP}`를 입력해줍니다. ${EIP} 라고 적은 부분은 실제로 이렇게 쓰라는 것이 아니라 Elastic IP를 적는 것입니다.
+4. 포트엔 SSH 포트인 22를 적어 주고, Connection type를 SSH로 체크해줍니다.
+5. Connection-SSH-Auth 탭에서 Private key file를 등록하는 곳에 puttygen을 통해 만든 ppk 파일을 넣어줍니다.
+6. Session 탭으로 돌아가서 Saved Sessions를 눌러 설정들을 저장해줍니다.
+7. SSH 접속 완료
+
+![ssh connection complete](https://user-images.githubusercontent.com/71186266/187028256-9538d332-9c77-48dd-8992-774dcfc76d01.png)
+
+
+## 5. 초기 설정
+아마존 리눅스 1 서버를 받은 다음 스프링 부트 + 톰캣 웹 어플리케이션 서버를 이용하기 위해 필수로 해야하는 설정들이 있습니다.
+1. Java 설치
+2. 타임존 변경하기: 기본으로 미국 시간대로 설정 되어있습니다.
+3. 호스트네임 변경하기: 서버 별명을 설정합니다. IP만으로는 여러 서버가 있을 때 식별하기가 어렵기 때문에 필수로 등록해야합니다.
+
+
+#### 5.1 java 설치
+1. 설치: `sudo yum install -y java-1.8.0-openjdk-devel.x86_64`
+2. 인스턴스 Java 버전 8로 변경하기: `sudo /usr/sbin/alternatives --config java`
+
+#### 5.2 타임존 한국으로 변경하기
+1. `sudo rm /etc/localtime`
+2. `sudo ln -s /usr/share/zoneinfo/Asia/Seoul /etc/localtime`
+3. `date` 명령어로 KST로 시간대가 바뀐 것을 확인하기.
+
+#### 5.3 Host Name 변경하기
+1. ~~`sudo vim /etc/sysconfig/network`~~ -> Linux 1에서나 쓰던 방법! 2 부터는 아래 방법으로 고친다.
+2. `sudo hostnamectl set-hostname ${ 원하는 호스트 이름 }`
+4. 호스트 주소 검색용으로 쓰이는 ect/hosts에 변경된 hostname 등록하기 `sudo vim /etc/hosts`
+5. `127.0.0.1` 에 위에서 등록한 이름 **추가하기!** -> `127.0.0.1`가 이미 있다! 무시하고 새로 한 줄 만들어주기.
+6. `sudo reboot`로 리부트 해서 확인
+
+
+## 6. github에서 EC2로 코드 받아오기
+### 6.1 깃허브 설치하기
+1. `sudo yum install git`
+2. 프로젝트 받아올 디렉토리를 만듭니다. `mkdir ~/app && mkdir ~/app/step1` 이런 식으로..
+3. 디렉토리로 이동 한다음 git clone 해줍니다.
+`git clone ${ 프로젝트 레포지토리 HTTPS 주소 }`
+
