@@ -1,4 +1,4 @@
-# [Spring] Spring WebSocket과 STOPM (1)
+# [Spring] Spring WebSocket과 STOPM (2)
 ## 1. Spring WebSocket이란?
 방식 3개
 1. 폴링: 일정 주기를 두고 데이터를 받아 옴.
