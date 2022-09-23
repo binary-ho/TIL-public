@@ -273,30 +273,65 @@ Link: [Google](https://google.com, "google link")
 __나는 볼드체를 자주 쓰는데, ~~별은 너무 자주 쓰여서 헷갈리니까 아래바 두개로 가두는 것이 편해보인다. 써 보니까 나름 편하다.~~__    
     -> 여러번 직접 써 보니 아래바는 글씨를 붙여 쓸 때 불편하다!    
     `__`로 가둔 이후 글씨를 붙여 쓰면 볼드체로 변하지 않는 것을 확인했다.. `**`이 더 낫다.
-
 ## 2.8 Image
+
+### 2.8.1 정석
+
 ```
 ![Alt text](/path/to/img.jpg)
 ![Alt text](/path/to/img.jpg "Optional title")
 ```
+
 사용 예시
 
 ![Alt text](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcIZNgv%2FbtraMqh9mCv%2FpZcKMalEyIVkrcbttmKWyK%2Fimg.jpg)
 
-사이즈 조절 기능은 없기 때문에 ```<img width="" height=""></img>```를 이용해야 한다. 한번 크기를 조절해보겠다.
+사이즈 조절 기능은 없기 때문에 `<img width="" height=""></img>`를 이용해야 한다. 한번 크기를 조절해보겠다.
 
 ```
 <img src="/path/to/img.jpg" width="450px" height="400px" title="px(픽셀) 크기 설정" alt="Jinho"></img><br/>
-<img src="/path/to/img.jpg" width="40%" height="30%" title="px(픽셀) 크기 설정" alt="Jinho"></img>
+<img src="/path/to/img.jpg" width="40%" height="30%" title="px(픽셀) 크기 설정" alt="Jinho"></img>    
 ```
-<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcIZNgv%2FbtraMqh9mCv%2FpZcKMalEyIVkrcbttmKWyK%2Fimg.jpg" width="450px" height="400px" title="px(픽셀) 크기 설정" alt="Jinho"></img><br/>
-<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcIZNgv%2FbtraMqh9mCv%2FpZcKMalEyIVkrcbttmKWyK%2Fimg.jpg" width="40%" height="30%" title="px(픽셀) 크기 설정" alt="Jinho"></img>
+
+![Jinho](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcIZNgv%2FbtraMqh9mCv%2FpZcKMalEyIVkrcbttmKWyK%2Fimg.jpg "px(픽셀) 크기 설정")![Jinho](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcIZNgv%2FbtraMqh9mCv%2FpZcKMalEyIVkrcbttmKWyK%2Fimg.jpg "px(픽셀) 크기 설정")
 
 퍼센트로의 조절이 더욱 쉬워 보인다. 간단하게
+
 ```
 <img src="/path/to/img.jpg" width="450px" height="400px"></img><br/>
 ```
+
 이정도만 써 줘도 무방하다.
+
+### 2.8.2 팁
+
+github issue를 이용하면 편리합니다!
+
+**1\. 아무 레포지토리에 들어갑니다.**
+
+**2\. 이슈 버튼을 누릅니다.**
+
+![ex](https://user-images.githubusercontent.com/71186266/191969582-6b0ecc40-b12f-456c-a94f-465558c004d1.png)
+
+**3\. New Issue 버튼을 누릅니다.**
+
+![ex2](https://user-images.githubusercontent.com/71186266/191969588-e9fd09d0-7fdc-4ef9-bf09-06163d042c1c.png)
+
+**4\. Write 칸에 사진 파일들을 끌어 넣으면, 자동으로 마크다운에 넣기 좋게 처리된 URL이 만들어집니다.**
+
+![ex3](https://user-images.githubusercontent.com/71186266/191969591-b91887f7-737e-432e-ae9a-85a9a842b37a.png)
+
+**5\. 그대로 마크다운 문서에 복사 붙여넣기 하면 완성입니다!**
+
+**성공적으로 랜더링 된 것을 볼 수 있습니다.**
+
+![ex4](https://user-images.githubusercontent.com/71186266/191969595-4855dda4-99fd-4073-8132-2b6d1ae0208c.png)
+
+6\. 위에서 보여준 미리 보기는 VSC의 LaTeX Workshop이라는 익스텐션입니다!
+
+저는 미리 보기 단축키를 \`Ctrl + Alt + V\`로 해 두었습니다. 편리하게 랜더링 결과를 미리 볼 수 있습니다.
+
+![ex5](https://user-images.githubusercontent.com/71186266/191969601-36cb8bef-105a-4bff-970e-22fda98ce289.png)
 
 ## 2.9 줄 띄우기
 이걸 이제 알았네... 줄 띄우기 기능이 있다
