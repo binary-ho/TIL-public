@@ -371,6 +371,7 @@ github issue를 이용하면 편리합니다!
 # 4. 정리
 markdown 문법을 좀 더 잘 활용하기 위한 기본 문법을 알아보았다.   
 새로운 내용들은 여기에 계속해서 보충해 면 될 것 같다. 노션에서 이용하던 것과 똑같아서 그리 낯설지는 않았다.
+(팁: 노션에서 작성한 글을 가져오면 MarkDown 처리 된다)
 
 ## ○ 참고
 [ihoneymon님의 how-to-write-by-markdown.md](https://gist.github.com/ihoneymon/652be052a0727ad59601#this-is-an-h1)
