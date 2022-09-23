@@ -296,7 +296,7 @@ __나는 볼드체를 자주 쓰는데, ~~별은 너무 자주 쓰여서 헷갈�
 <img src="/path/to/img.jpg" width="40%" height="30%" title="px(픽셀) 크기 설정" alt="Jinho"></img>    
 ```
 
-<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcIZNgv%2FbtraMqh9mCv%2FpZcKMalEyIVkrcbttmKWyK%2Fimg.jpg" width="600px" height="400px"  title="px(픽셀) 크기 설정" alt="Jinho"></img><br/>
+<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcIZNgv%2FbtraMqh9mCv%2FpZcKMalEyIVkrcbttmKWyK%2Fimg.jpg" width="600px" height="600px"  title="px(픽셀) 크기 설정" alt="Jinho"></img><br/>
 <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcIZNgv%2FbtraMqh9mCv%2FpZcKMalEyIVkrcbttmKWyK%2Fimg.jpg" width="40%" height="30%"  title="px(픽셀) 크기 설정" alt="Jinho"></img>    
 
 퍼센트로의 조절이 더욱 쉬워 보인다. 간단하게
