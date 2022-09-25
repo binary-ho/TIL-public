@@ -4,7 +4,7 @@ Markdown 문법
 이 글도 markdown으로 쓰여 있습니다 raw 버튼을 눌러 확인하세요!
 이 글도 VSC로 작성하였습니다. <br> 
 **[추천 익스텐션]** <br>
-**Markdown all in one을 통해 미리 랜더링된 결과를 볼 수 있고(`ctrl + shift + v`), 일반 문서 편집기와 같은 명령어들을 이용할 수 있습니다. ex) `ctrl + B`로 bold체 변경** [(2.8.2.6)](#Markdown-all-in-on) <br>
+**Markdown all in one을 통해 미리 랜더링된 결과를 볼 수 있고(`ctrl + shift + v`), 일반 문서 편집기와 같은 명령어들을 이용할 수 있습니다. ex) `ctrl + B`로 bold체 변경** [(2.8.2.6)](#Markdown-all-in-one) <br>
 **Markdown Preview Enhance를 추가로 설치하면, Markdown all in one를 통해 만든 미리 보기의 배경을 하얀 색으로 바뀌 더 편하게 볼 수 있습니다.**
 
 # 1. Markdown 문법을 공부하는 이유
