@@ -3,7 +3,9 @@ Markdown 문법
 
 이 글도 markdown으로 쓰여 있습니다 raw 버튼을 눌러 확인하세요!
 이 글도 VSC로 작성하였습니다. <br> 
-**LaTeX Workshop이라는 익스텐션을 이용하면 편하게 미리 보기를 사용할 수 있습니다.** [(2.8.2.6)](#latex-workshop)
+**[추천 익스텐션]** <br>
+**Markdown all in one을 통해 미리 랜더링된 결과를 볼 수 있고(`ctrl + shift + v`), 일반 문서 편집기와 같은 명령어들을 이용할 수 있습니다. ex) `ctrl + B`로 bold체 변경** [(2.8.2.6)](#Markdown-all-in-on) <br>
+**Markdown Preview Enhance를 추가로 설치하면, Markdown all in one를 통해 만든 미리 보기의 배경을 하얀 색으로 바뀌 더 편하게 볼 수 있습니다.**
 
 # 1. Markdown 문법을 공부하는 이유
 <!--  매일 개발 공부를 하지만 공부한 내용들이 머릿속에서 금방 휘발되어 버리고 만다. 분명 공부량은 많은 것 같은데 남는 것은 적은 느낌을 받았다. 직접 풀은 문제인데 다시 풀려니 못 풀겠거나, 분명 배운 내용인데 설명 하지 못 하는 상황이 많았다.   
@@ -336,11 +338,14 @@ github issue를 이용하면 편리합니다!
 ![ex4](https://user-images.githubusercontent.com/71186266/191969595-4855dda4-99fd-4073-8132-2b6d1ae0208c.png)
 
 
-6\. 위에서 보여준 미리 보기는 VSC의 LaTeX Workshop이라는 익스텐션입니다!
+6\. 위에서 보여준 미리 보기는 VSC의  Markdown all in one이라는 익스텐션을 통해 렌더링한 결과입니다!
 
 저는 미리 보기 단축키를 \`Ctrl + Alt + V\`로 해 두었습니다. 편리하게 랜더링 결과를 미리 볼 수 있습니다.
-###### LaTeX Workshop
-![ex5](https://user-images.githubusercontent.com/71186266/191969601-36cb8bef-105a-4bff-970e-22fda98ce289.png)
+###### Markdown all in one
+
+![markdownallinone](https://user-images.githubusercontent.com/71186266/192130002-e1be6410-6f4d-4c77-a2a0-0ecb48879076.png)
+![previewenhance](https://user-images.githubusercontent.com/71186266/192130000-9f5dabd0-a7fe-4935-9bd3-a567f0d63385.png)
+
 
 ## 2.9 줄 띄우기
 이걸 이제 알았네... 줄 띄우기 기능이 있다
