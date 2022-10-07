@@ -11,7 +11,7 @@
 
 대표적인 예시로는 JdbcTemplate, RestTemplate, TransactionTemplate, RedisTemplate 등이 있는데, 몇 가지 코드를 직접 뜯어서 살펴보며 분석해보겠다. <br> <br>
 
-설명에 앞서, 책에서 사용하는 용어인 컨텍스트와 전략은 Template Callback Pattern에서 각각 템플릿, 콜백에 대응한다! 그리고, **꼭 익명 내부 클래스로 구현할 필요는 없다!** 이것 때문에 여기 저기 물어보고 다녔다 ㅡㅡ
+설명에 앞서, 책에서 사용하는 용어인 **전략 패턴의 '전략'은 Template Callback Pattern에서 템플릿으로 구현된 콜백에 대응한다!** 그리고, **꼭 익명 내부 클래스로 구현할 필요는 없다!** 이것 때문에 여기 저기 물어보고 다녔다
 
 ## 1. JdbcTemplate
 
@@ -28,7 +28,7 @@ Q2. 맞다면, 템플릿 콜백 패턴을 구현 할 때, 전략을 꼭 익명 �
 
 
 
-Template Callback Pattern에서의 전략은 콜백에 대응한다. 정확히는 이 콜백 인터페이스의 구현 클래스의 객체가 전략으로서 들어간다! <br>
+Template Callback Pattern에서의 전략은 템플릿으로 구현된 전략이다. 정확히는 이 콜백 인터페이스의 구현 클래스의 객체가 전략으로서 사용된다! <br>
 예시로 JdbcTemplate에서 제일 그럴싸 해보이는 StatementCallback 인터페이스를 살펴 보았다. sql state를 처리하기 위해 있는 인터페이스이다.
 
 ```java
