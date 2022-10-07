@@ -50,3 +50,21 @@ execute 메서드는 StatementCallback의 구현체를 입력으로 받는다. e
 ![QueryStatementCallbackWithRedBox](https://user-images.githubusercontent.com/71186266/194120585-fcdd0b55-4810-4ec1-83a8-f2c8bdff13b2.png)
 
 query 함수는 내부적으로 StatementCallback 인터페이스를 구현한 local inner class QueryStatementCallback을 정의하고, return에서 QueryStatementCallback의 구현체를 넣어서 execute를 호출한다. 그러면 query가 일종의 클라이언트에 해당한다. 
+
+## 2. RedisTemplate
+
+전략으로 쓰이는 콜백 메서드 하나를 잡았다.
+```java
+public interface RedisCallback<T> {
+	@Nullable
+	T doInRedis(RedisConnection connection) throws DataAccessException;
+}
+```
+이를 입력으로 받는 컨텍스트 - excute 메서드 발견
+![redis excute](https://user-images.githubusercontent.com/71186266/194262293-db2c3298-41f2-4fa1-abf3-0e25cb1055c1.png)
+
+그리고 excute를 호출하는 클라이언트 입니다.
+![redis ramda](https://user-images.githubusercontent.com/71186266/194262298-8e963e24-9959-4bbb-8a60-41a868ce68ab.png)
+
+추가
+![redis start](https://user-images.githubusercontent.com/71186266/194267082-af27ed89-a19a-489c-809e-825b53fca8b2.png)
