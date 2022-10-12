@@ -241,3 +241,8 @@ Function<Integer, int[]> factory3 = (x) -> new int[x];
 Function<Integer, int[]> factory3 = int[]::new;
 ```
 매개 변수가 있는 생성자라면, 그에 맞는걸로 해주면 된다. 물론 배열도 된다.
+
+  ### Reference
+- [bugoverdose님 블로그](https://bugoverdose.github.io/development/stream-lazy-evaluation/)
+- 자바의 정석 2권 <남궁민 저>
+- 스프링 입문을 위한 자바 객체지향
