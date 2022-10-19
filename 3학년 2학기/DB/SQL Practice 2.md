@@ -29,12 +29,21 @@ GROUP BY C.grade;
 ```
 
 3. get grade that has minimumm average ages
-```sql
-SELECT C.grade
-FROM Client C
-GROUP BY C.grade
-HAVING AVG (C.age)
-= (SELECT MIN (AVG (C2.age)) AS mgavg FROM Client C2 GROUP BY C2.grade);
-```
-마지막 그룹바이 안 해도 되는지 체크 필요.
-급해서 위와 같이 작성 이후 제출함 
+<br>
+
+~~SELECT C.grade <br>
+FROM Client C <br>
+GROUP BY C.grade <br>
+HAVING AVG (C.age) <br>
+= (SELECT MIN (AVG (C2.age)) AS mgavg FROM Client C2 GROUP BY C2.grade); <br>
+<br>
+마지막 그룹바이 안 해도 되는지 체크 필요. <br>
+급해서 위와 같이 작성 이후 제출함 ~~
+
+<br>
+
+틀렸다.
+
+![get minimum average age's rating](https://user-images.githubusercontent.com/71186266/196641671-ddaaecc2-9878-4bd4-93e4-1740376be9aa.jpg)
+
+이게 올바른 답이다.
