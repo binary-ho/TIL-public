@@ -55,7 +55,7 @@ void IntList::Delete(int e) {
             first = first->link;
         } else{
             Node *ptr = first;
-            while (ptr-> link != NULL && ptr-> link != last &&  ptr->link->data != e) ptr = ptr->link;
+            while (ptr-> link != NULL &&  ptr->link->data != e) ptr = ptr->link;
             if(ptr->link != NULL && ptr->link->data == e) {
 		if (ptr->link == last) last = ptr;
 		ptr->link = ptr->link->link; 
