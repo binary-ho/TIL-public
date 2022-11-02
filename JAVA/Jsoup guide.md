@@ -1,4 +1,4 @@
-# jsoup guide for yoon yung babys
+# Jsoup guide for yoon yung babys
 선 요약
 0. 의존성 추가
 1. html 소스를 String으로 가져온다.
