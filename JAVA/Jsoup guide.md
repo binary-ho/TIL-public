@@ -21,8 +21,9 @@ dependencies {
   implementation 'org.jsoup:jsoup:1.15.3'
 }
 ```
-gradle 프로젝트의 경우고, maven의 경우 버전은 자유롭게 고쳐 써도 됨. `1.15.3`은 가장 최신이고 usage가 가장 많은 버전은 `1.13.1`
-
+gradle 프로젝트의 경우고, maven의 경우 `pom.xml`의 dependencys에 아래 코드 넣어준다. <Br>
+  
+버전은 자유롭게 고쳐 써도 됨. `1.15.3`은 가장 최신이고 usage가 가장 많은 버전은 `1.13.1`
 ```java
 <dependency>
     <groupId>org.jsoup</groupId>
