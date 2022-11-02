@@ -1,3 +1,177 @@
+# Law of Demeter
+
+<!-- 디미터 법칙은 `묻지 말고 시켜라` 스타일로도 알려져 있다. (엄밀하게 같은 것은 아님) <br> -->
+
+디미터 법칙은 객체를 자율적으로 만드는 것이 목적이다. 이를 통해 객체의 정보의 은닉성이 높아지고 (캡슐화 보장), 다른 객체와의 결합도가 낮아진다.  <br>
+
+자율적이라는 말이 무슨 의미일까? 또, 코드로는 어떻게 구현될까? 이에 대해 설명하기 전에 메시지 개념에 대해 이야기하겠다.  <br>
+
+
+## 1. 메시지 개념
+디미터 법칙을 설명하기 전에 메시지 개념에 대해서 설명하겠다. <br>
+
+객체지향의 핵심은 상속 관계로 부터 나온다는 말이 있다. 그러나 객체지향의 핵심을 메시지로 보는 시선도 있다. <br>
+객체가 어떤 행동을 하는 유일한 이유는 바로 **다른 객체의 요청을 받았기 때문이다.** <br> 
+각 객체가 주고 받는 요청을 **메시지라고 부르고,** 메시지는 객체들이 서로 협력하기 위해 사용할 수 있는 유일한 소통수단이다.
+<br>
+<!-- 
+책임-주도 설계는 객체가 아니라, 객체들이 주고 받는 메시지에 초점을 맞춘다. 설계를 할 때, 내가 어떤 객체가 필요한지를 먼저 생각하지 말고, **어떤 메시지가 필요한지를 먼저 고민하라는 것이다.** <br>
+ -->
+
+
+매시지는 메시지 이름과, 메시지 인자로 나우어져 있다. 어떤 사건의 증인으로 재판에 참여한 모자 장수가 있다고 하자. 재판장은 모자 장수에게 `증언하라`라고 요구할 것이다. 이것이 메시지 이름이 되고, `어제 매장에서 있었던 일을 증언하라`라고 말 한다면, `어제, 왕국`과 같은 내용들이 메시지 인자가 된다.
+
+<br>
+
+인터페이스는 어떤 객체가 수신할 수 있는 메시지의 목록이라고 볼 수 있다. <br>
+
+메시지의 송신자가 되는 객체는 수신자가 메시지에 대해 반응할 것이라고만 어렴풋이 알면 되고, 메시지에 대한 세세한 반응은 전부 수신자 객체가 결정해야한다! <br>
+
+## 2. 객체의 자율성
+
+`이진호 너 어제 어디 있었어`. 이런 질문은 `what`만 있기 때문에, **어떻게** 표현할지는 수신자인 이진호가 정할 수 있다. 이런 경우 객체는 자율성이 있다. <br>
+이런 질문에는 `집`과 같이 답변을 수신자가 정할 수 있다. <br> 
+
+그럼 이러한 질문을 보자. `이진호 너 어제 언제 어디서 누구랑 있었는지 아침 부터 밤까지 시간 순서대로 세세하게 말 해봐`와 같은 질문은 what 뿐만 아니라 시간 순서대로 세세하게 말 해야한다는 **how의 제한이 있다.** `어떻게`가 들어가 마자 수신자의 선택은 크게 제한된다. <br>
+수신자는 시간 순서대로 세세하게 말 하면서 자신의 데이터도 지키지를 못 한다. <br> 
+따라서, 객체의 자율성을 존중하기 위해선, 메시지를 `What`까지만 요구하고, 내부 처리는 객체에게 맡겨야 한다. <br>
+
+자율적인 객체는 자신의 데이터를 어떻게 공개할지 자신이 결정한다. 객체가 원한다면, **다른 객체가 어떠한 자료를 갖고 있는지 속사정을 몰라야 한다**. 함부로 까볼 수 없게 해야한다. **디미터 법칙이 다소 모호하게 느껴지는데, 실제로 객체를 구현할 때는 이 점을 유의하면 된다.** <br>
+
+이렇게 객체에 자율성을 주면 객체는 내부와 외부가 분리된다. 상대 객체는 다른 객체의 외부 인터페이스만 알고, 내부 구현은 알지 못 한다. <br> 
+
+## 3. 디미터 법칙을 어긴 예시
+디미터 법칙에선 객체의 자율성을 강조했다. 이는 코드로 어떻게 나타날까?
+```java
+public Mono<Void> deletePost(final DeletePostCommand command) {
+  return postRepository.findByPostId(command.getPostId())
+        .switchIfEmpty(Mono.error(new PostNotFoundException()))
+        .flatMap(post -> {
+            if (!post.getUser().getId().equals(command.getDeleter().getUserId())) {
+                return Mono.error(new AccessDeniedException());
+            }
+            return postRepository.save(post.deleteAndCopy());
+          })
+          .then();
+}
+
+```
+여기서 이 부분만 떼어 보자
+
+```java
+if (!post.getUser().getId().equals(command.getDeleter().getUserId())) {
+      return Mono.error(new AccessDeniedException());
+}
+```
+post에서 getUser를 통해 유저 객체를 가져온 다음, getId()를 통해 유저의 id를 가져왔다. 이후 커맨드에서 getDleter()를 통해 딜리터를 가져오고 또 getUserId를 통해 아이디를 가져왔다. <br>
+
+이는 `deletePost` 메소드가 `user` 객체와 `deleter`객체의 자율성을 개무시한 것이다. 이 두 객체가 사람이라고 생각해보자. 그냥 id를 담고 다니는 통 정도로 취급해서 아이디를 직접 빼낸 다음 내가 사용한 것이다. <br>
+
+이렇게 하기보다는 
+```java
+public Mono<Void> deletePost(final DeletePostCommand command) {
+  return postRepository.findByPostId(command.getPostId())
+      .switchIfEmpty(Mono.error(new PostNotFoundException()))
+      .flatMap(post -> postRepository.save(post.deleteAndCopy(command.getDeleter())))
+      .then();
+}
+```
+이렇게 하라는 것이다.
+```java
+.flatMap(post -> postRepository.deleteAndCopy(command.getDeleter()))
+```
+따로 떼어낸 if문이 이렇게 변했다. 이전과 달리 메소드
+레포지토리는 여러 객체를 깊이 탐색하지 않고, 포스트가 직접 deleteAndCopy()메소드를 수행하면서, post 삭제 권한을 체크하는 것이다. <br>
+
+
+### 더 간단한 예시
+더 간단한 예시를 보자.
+```java
+@Service
+public class NotificationService {
+
+    public void sendMessageForSeoulUser(final User user) {
+        if("서울".equals(user.getAddress().getRegion())) {
+            sendNotification(user);
+        }
+    }
+}
+```
+서울의 사는 유저를 발견할 경우 if문이 true가 되는 코드다. <br>
+유저는 Address 객체를 내부적으로 가지고 있고, Address 객체는 내부적으로  Region 객체를 가지고 있다. <br>
+
+코드는 sendMessageForSeoulUser 메소드가 user를 가져와서, 그 안의 address 객체를 가져와서, 그 안의 region을 가져온 다음 비교한다. <br>
+객체 user한테 메시지를 보내야하는데, 객체 user의 데이터를 까보고, 또 그 안의 객체를 까 보는 행위를 하고 있다. <br>
+
+user는 자율성이 굉장히 무시당하고 있다. 메소드가 user의 데이터를 까보는 것 뿐만 아니라 그 안의 Address 객체까지 까 보고 있다. <br>
+
+따라서, 아래와 같은 수정이 필요하다.
+```java
+public class Address {
+
+    private String region;
+    private String details;
+
+    public boolean isSeoulRegion() {
+        return "서울".equals(region);
+    }
+}
+
+public class User {
+
+    private String email;
+    private String name;
+    private Address address;
+
+    public boolean isSeoulUser() {
+        return address.isSeoulRegion();
+    }
+}
+```
+Address에 `isSeoulRegion()`과 User에 `isSeoulUser()`를 추가해 줌으로써, 객체가 데이터를 전부 공개하지 않도록 해주었다. **이제 메소드가 물어볼 수 있는 것은 그저 서울에 살고 있니? 뿐이다.**
+
+
+## 4. 실질적인 구현 - Don't Talk to Stranger
+실질적인 구현은 **객체들의 협력 경로를 줄이면서 진행한다.**
+
+객체를 파고 드는 점을 하나로 제한한다고도 표현한다. 무슨 의미일까.
+
+<br>
+
+```java
+@Service
+public class NotificationService {
+
+    public void sendMessageForSeoulUser(final User user) {
+        if("서울".equals(user.getAddress().getRegion())) {
+            sendNotification(user);
+        }
+    }
+}
+```
+아까 보인 예제를 다시 보자. 메소드 `sendMessageForSeoulUser()`는 user 객체의 address 객체의 region 필드를 꺼내고 있다. 아주 멀리 있는 객체의 필드를 꺼내고 있는 것이다. 이런 설계를 피하자는 것이다. 앞서 언급한 방식으로 고치면 이런 설계를 피할 수 있다. <br>
+
+getter가 줄줄이 이어져 **낯선,** **멀리있는** 객체를 건들지 않자는 의미로 `Don’t Talk to Strangers` 혹은 `Principle of least knowledge` 등의 규칙으로 불리고 있다.  <br>
+
+구체적으로는 어떻게 구현하라는 것일까? <br>
+디미터 법칙의 실질적 구현은 아래와 같은 규칙을 따르면 된다.
+
+### 노출 범위를 제한하기 위해, 객체의 모든 메서드는 다음에 해당하는 객체와 메서드만 호출할 수 있다.
+### 1. 객체 자신의 것들
+### 2. 메서드의 파라미터로 넘어온 객체들의 것들
+### 3. 메서드 내부에서 생성, 초기화된 객체의 것들
+### 4. 인스턴스 변수로 가지고 있는 객체가 소유한 것들
+
+조금이라도 멀리 있는 것들을 웬만하면 건들지 말자는 것이다 <br> 
+이러한 규칙들로 디미터 법칙을 지킬 수 있다.
+
+
+## Reference
+- 객체 지향의 사실과 오해
+- [Hello, Hannah](https://prohannah.tistory.com/204)
+- [망나니 개발자](https://mangkyu.tistory.com/147)
+- [https://tecoble.techcourse.co.kr/post/2020-06-02-law-of-demeter/](https://tecoble.techcourse.co.kr/post/2020-06-02-law-of-demeter/)
+<!-- 
 작성중
 
 
@@ -144,3 +318,4 @@
 ## 책임의 자율성이 협력의 품질을 결정한다.
 
 객체의 책임이 자율적일 수록 협력이 이해하기 쉬워지고, 유연하게 변경할 수 있게 된다. 결과적으로 채김이 얼마나 자율적인지가 전체적인 협력의 설계 품질을 결정하게 된다.
+ -->
