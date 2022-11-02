@@ -3,7 +3,7 @@
 
 1. 의존성 추가
 1. html 소스를 String으로 가져온다.
-2. Spring을 `Jsoup.parse`를 통해 파싱.
+2. html 소스 String을 `Jsoup.parse`를 통해 파싱.
 3. 결과를 `org.jsoup.nodes`의 `Document`로 받음
 4. `org.jsoup.nodes.Element`의 `select`메서드로 가져오고 싶은 클래스나 attribute를 가져올 수 있다.
 
