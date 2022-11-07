@@ -21,8 +21,7 @@ int state = STOP;
 
 ISR(INT0_vect)
 {
-	if (state == STOP) state = START;
-	else state = STOP;
+	state = 1 - state;
 }
 
 ISR(INT1_vect)
@@ -33,16 +32,20 @@ ISR(INT1_vect)
 ISR(INT2_vect)
 {
 	if (SHOW_NUMBER12 < 50) SHOW_NUMBER12 += 10;
-	else SHOW_NUMBER12 -= 50;
+	else {
+		SHOW_NUMBER12 = 0;
+		SHOW_NUMBER34 = 0;
+		if (PORTG != 0x00) PORTG = 0x00;
+	}
 }
 
 int main(void)
 {
 	DDRC = 0xff;
 	DDRA = 0xff;
-	DDRG = 0x03;	// LED용
+	DDRG = 0x03;	// LED용 포트 G
+		EIMSK = 0x07;	// 인터럽트 버튼 0 ~ 2를 쓰겠다는 선언
 	EICRA = 0x3F;	// 인터럽트 버튼 0 ~ 2를 상승 에지에서 사용하기 위해 64 - 1을 넣어준 것.
-	EIMSK = 0x07;
 	SREG |= 0x80;
 	
 	PORTC = 0x00;
