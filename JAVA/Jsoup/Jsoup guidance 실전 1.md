@@ -10,7 +10,17 @@
 굳이 굳이 라이브러리를 다 적는 이유는 Documet와 같은 경우 여러 라이브러리에서 지원하기 때문에, 헷갈리면 안 되기 때문이다. <br>
 보여줄 예제는 html파싱으로 깃허브 커밋 이력 대충 가져오는 예제. (실제로는 github API쓰면 됨)
 
-## 1. Dependencie 추가 하기
+## 0. Jsoup이란?
+정확히는 **스크래핑 툴로 웹 페이지 Html Source를 가져온다.** 이후 다양한 강력한 기능들로 파싱해서 사용할 수 있다.
+
+|클래스|설명|
+|:----:|:----:|
+|Document|Jsoup으로 HTML을 긁어온 결과 그 자체, 전체 Source에 해당한다.|
+|Element|Document의 HTML 요소로 Document의 부분으로 이해하면 된다. <br> 결국 파싱한 결과가 Element로 나타난다.|
+|Elements| Element의 이터러블한 자료형. 주로 여러 Element들이 반환되는 메서드의 반환형임.|
+|Response|Jsoup이 Document와 함께 가져오는 정보로, status 관련 내용이나 헤더 메시지 쿠키 등의 **해당 URL의 접속과 관련된 정보를 가져온다.**|
+
+## 1. Dependency 추가 하기
 `build.gradle` 안의 `dependencies` 부분에 아래와 같은 코드 추가
 ```java
 // build.gradle 
@@ -78,6 +88,12 @@ public Document getHTMLDocument() {
 
 `Document`에 주의! `org.jsoup.nodes`의 것을 받아와야함.
 
+<br> 
+나중에 알게 된 사실인데, 다 필요 없고 바로 Document로 파싱하는 함수가 있음.
+```java
+  Document document = Jsoup.connect("https://apl.hongik.ac.kr/lecture/dbms").get();
+```
+위의 과정이 다 필요 없다..
 
 ## 4. 원하는 클래스나 attribute 가져오기
 
@@ -144,3 +160,12 @@ return  Integer.parseInt(dayContributionString);
 ![suc](https://user-images.githubusercontent.com/71186266/199424433-9091c074-5c97-4f48-9d7c-774f42131c1e.png)
 
 성공
+  
+## 5. 실전에서는 어떻게 사용할까?
+실전에서는 **클래스 이름을 쓸 수 없는 경우가 대부분이다.** 빌드 과정에서 자동 생성되는 경우가 있기 떄문.. <br>
+그래서 내가 추천하고 싶은 방법은 역시 tag나, attribute와 예상 value를 찾는 것이다. <br>
+  
+예를 들어 깃허브의 잔디의 tag는 `<rect>`이고, attribute `day-count`가 존재한다. 이 값을 이용하는 것이 결국 실전 스크리핑의 현실적인 방법이다. <br>
+  
+#### About Text
+각종 삽질을 통해 찾은 Text관련 메서드들..  Text관련 함수가 실전에서는 중요해 보인다.
