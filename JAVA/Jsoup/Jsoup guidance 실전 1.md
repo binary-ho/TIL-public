@@ -19,6 +19,7 @@
 |Element|Document의 HTML 요소로 Document의 부분으로 이해하면 된다. <br> 결국 파싱한 결과가 Element로 나타난다.|
 |Elements| Element의 이터러블한 자료형. 주로 여러 Element들이 반환되는 메서드의 반환형임.|
 |Response|Jsoup이 Document와 함께 가져오는 정보로, status 관련 내용이나 헤더 메시지 쿠키 등의 **해당 URL의 접속과 관련된 정보를 가져온다.**|
+|Connection| URL과의 연결을 위한 클래스. 연결 정보들이 담겨 있음|
 
 ## 1. Dependency 추가 하기
 `build.gradle` 안의 `dependencies` 부분에 아래와 같은 코드 추가
