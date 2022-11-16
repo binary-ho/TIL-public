@@ -166,6 +166,33 @@ return  Integer.parseInt(dayContributionString);
 그래서 내가 추천하고 싶은 방법은 역시 tag나, attribute와 예상 value를 찾는 것이다. <br>
   
 예를 들어 깃허브의 잔디의 tag는 `<rect>`이고, attribute `day-count`가 존재한다. 이 값을 이용하는 것이 결국 실전 스크리핑의 현실적인 방법이다. <br>
+
+**결국, 스크래핑 하는 정보가 담긴 부분의 tag나, attribute의 규칙만 파악하면 된다는 것!**
   
-#### About Text
-각종 삽질을 통해 찾은 Text관련 메서드들..  Text관련 함수가 실전에서는 중요해 보인다.
+#### Text
+각종 삽질을 통해 찾은 Text관련 메서드들..  결국 웹 페이지에서 어떤 정보를 나타낼 떄, Plain Text가 제목이나 세부 정보의 역할을 할 확률이 높다. <br>
+결국 Text관련 함수가 실전에서는 중요해 보인다.
+
+1. text() :star:
+아주 강력한 메서드! element 내 Text 요소를 전부 털어온다! 결국 나타나는 정보를 털어오려면 `text()`가 필요하고 웬만한 웹 사이트는 이거 하나만 있어도 중요 정보를 다 가져올 수 있다.
+```java
+  private List<Example> parseExamples(List<Element> elements) {
+      List<Example> examples = new ArrayList<>();
+      elements.forEach(element -> {
+          String[] fieldArray = element.text().split(",");
+          Example example = new Example();
+          example.setName(fieldArray[0].trim());
+          example.setAge(fieldArray[1].trim());
+          example.setEmail(fieldArray[2].trim());
+          examples.add(student);
+      });
+      return examples;
+  }
+```
+예시만 봐도 얼마나 강력한지 알 수 있다.
+
+2. 내부적으로 특정 plain 텍스트를 가진 Element를 반환!
+```java
+  document.body().getElementsContainingOwnText("test");
+  document.body().getElementsMatchingText("test"); 
+```
