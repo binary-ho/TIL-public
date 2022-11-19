@@ -1,0 +1,61 @@
+# 5.6 주문 검색 기능 개발 - JPA 동적 쿼리
+앞서, 레포지토리에 추가하지 않았던, 검색 기능을 추가해보자.
+
+1. `OrderSerch class` 만들기 - 이름이나, 상태로 검색 가능
+```java
+@Getter @Setter
+public class OrderSearch {
+    
+    private String memberName;
+    private OrderStatus orderStatus;
+}
+
+```
+
+
+2. 검색 기능 개발 - 쿼리 만들기
+
+```java
+@Repository
+@RequiredArgsConstructor
+public class OrderRepository {
+
+    private final EntityManager em;
+
+    public void save(Order order) {
+        em.persist(order);
+    }
+
+    public Order findOne(Long id) {
+        return em.find(Order.class, id);
+    }
+
+    public List<Order> findAll(OrderSearch orderSearch) {
+        return em.createQuery("select o from Order as o join o.member as m " +
+                "where o.status = :status " +
+                "and m.name like :name", Order.class)
+                .setParameter("status", orderSearch.getOrderStatus())
+                .setParameter("name", orderSearch.getMemberName())
+                .setFirstResult(100)
+                .setMaxResults(1000)
+                .getResultList();
+    }
+}
+```
+아름다운 쿼리가 만들어 졌다.
+
+## 3. 동적 쿼리 문제
+그런데, 이는 status나 name이 있을 떄의 이야기이고, 입력이 없는 경우 status나 name에 무관하게 전부 다 가져오도록 하려면 어떻게 할까?
+```java
+public List<Order> findAll(OrderSearch orderSearch) {
+    return em.createQuery("select o from Order as o join o.member as m ", Order.class)
+            .setFirstResult(100)
+            .setMaxResults(1000)
+            .getResultList();
+}
+```
+이런 모양의 쿼리로 바뀌어야 할 것이다! <br>
+
+1. 진짜 if 통해 name이나 status 유무에 따른 동적 쿼리 생성
+2. JPA Criteria
+3. **JPA Querydsl**
