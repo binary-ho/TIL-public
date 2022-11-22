@@ -1,2 +1,6 @@
 # 윤영 교수님의 Database Systems 수업
 단순 수업 내용 정리라고 생각하지 말고, 나중에 면접까지 대비할 수 있는 자료를 만들자는 마음으로 작성해보자
+
+
+## Reference
+- Database Management Systems \<Raghu Ramkrishnan 저>
