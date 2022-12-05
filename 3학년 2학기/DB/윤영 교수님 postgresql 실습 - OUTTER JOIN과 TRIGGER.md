@@ -69,9 +69,14 @@ GROUP BY canned_food.name;
 |   5   | "곰과 연어" |   1   |
 
 ## 5. OUTTER JOIN 실습 문제
-## 모든 상품의 평균 평점을 상품 이름, 종류와 함께 출력하시오
+### 1. 물건의 아이디와 타입을, 해당 물건들의 평균 평점과 함께 보여라
+```sql
+SELECT item_type, item_id, avg(rating.rating) AS rating
+FROM rating
+GROUP BY item_type, item_id;
+```
+## 2. 모든 상품의 평균 평점을 상품 이름, 종류와 함께 출력하시오
 
-## 방법 1 - UNION
 ```sql
 SELECT items.name, items.item_type, AVG(items.rating)
 FROM
@@ -107,60 +112,6 @@ GROUP BY items.name, items.item_type;
 |     "연어"     | "canned_food" |     2      |
 |    "진라멘"    |    "ramen"    |     4      |
 |   "추풍라면"   |    "ramen"    |     1      |
-
-### 방법 2 - OUTTER JOIN!!
-지독하게 단순한 방법 <br>
-
-꼭 이해해서 숙지하자!
-1. rating에서 아이템 타입과 아이디, 레이팅을 가져온다. (`GROUP BY`는 필드에 보이기 위해 사용)
-2. **RIGHT JOIN을 아주 멋있게 사용했다!!**
-
-
-**결국 레이팅에는 아이템의 타입과, 그 타입 안에서의 id를 가지고 있고, 이름은 없는 상황인건데** <br>
-**name이 있는 테이블에서는 id를 통해 매칭한다 그리고 아주 중요한 부분인데, 각 테이블 명을 item_type으로 써 주었다!!** <br>
-
-내가 생각하지 못한 부분이 바로 여기다!! 꼭 여러번 봐서 숙지하도록 하자!! <br>
-
-### 모든 상품의 평균 평점을 상품 이름, 상품 종류와 함께 출력하는 쿼리문
-```sql
-SELECT name, item_type, rating
-FROM
-(
-  SELECT item_type, item_id, avg(rating.rating) as rating
-  FROM rating
-  GROUP BY item_type, item_id
-) rating
-RIGHT JOIN
-(
-  (SELECT name, id AS item_id, 'drink' AS item_type FROM drink)
-  UNION ALL
-  (SELECT name, id AS item_id, 'ramen' AS item_type FROM ramen)
-  UNION ALL
-  (SELECT name, id AS item_id, 'canned_food' AS item_type FROM canned_food)
-) items
-USING (item_id, item_type)
-```
-
-결과는 아래와 같이 나오게 된다.
-
-|      name      |   item_type   | rating |
-| :------------: | :-----------: | :----: |
-| "에너지드링크" |    "drink"    |   1    |
-|  "오렌지주스"  |    "drink"    |  null  |
-|   "무안단물"   |    "drink"    |  null  |
-|   "순진맥주"   |    "drink"    |  null  |
-|     "더맛"     |    "drink"    |   3    |
-|  "오랜지주스"  |    "drink"    |  null  |
-|    "진라멘"    |    "ramen"    |   4    |
-|  "고추짜장면"  |    "ramen"    |   1    |
-|   "리얼짬뽕"   |    "ramen"    |  null  |
-|   "추풍라면"   |    "ramen"    |   1    |
-|  "겨울이라면"  |    "ramen"    |   2    |
-|     "참치"     | "canned_food" |  null  |
-|   "고추참치"   | "canned_food" |  null  |
-|     "연어"     | "canned_food" |   2    |
-|  "곰과 연어"   | "canned_food" |   1    |
-|     "삼치"     | "canned_food" |   3    |
 
 
 ## 6. Trigger와 함수
@@ -206,12 +157,23 @@ FOR EACH ROW EXECUTE PROCEDURE inc();
 1. `inc()`라는 함수를 정의했습니다. 
 2. TRIGGER를 리턴하는데, num_subs의 값을 ++ 해주는 트리거를 리턴합니다.
 3. 트리거를 만듭니다. **지정한 table에서 INSERT가 일어나면 발동됩니다.**
-4. 모든 열에 대해 inc를 실행합니다.
+4. **막 삽입된 열들에 대해 각각 inc를 실행합니다.**
 
 
 이렇게 설정 해주면, 구독자 정보가 설정되면, 즉 **subs_table에 뭔가가 INSERT 되면, num_subs를 UPDATE합니다.** <br>
 백엔드 단에서는 아마 구독자가 생기면 구독자 정보를 입력할 것입니다. 이에 맞춰 구독자 수를 늘려주는 연산이 DB에서 실행됩니다. <BR>
 이는 생각해보면 매우 편리한 기능입니다. 어차피 백엔드 단에서도 구독자 수를 받아와서 1만큼 늘려줬을 텐데, 커넥션 없이 바로 구독자 수를 늘릴 수 있으니 아주 좋은 상황이라고 할 수 있습니다.
 
+5. 잘 들어갔나 확인해봅시다
+```sql
+SELECT * FROM num_subs;
+```
+
+6. 기타 메서드
+```sql
+\du -> 모든 유저 보기
+\dt -> 모든 테이블 보기
+\df -> 모든 함수 보기
+```
 ## Reference
 - [장동호](https://github.com/jjddhh)
