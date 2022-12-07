@@ -75,8 +75,7 @@ SELECT item_type, item_id, avg(rating.rating) AS rating
 FROM rating
 GROUP BY item_type, item_id;
 ```
-## 2. 모든 상품의 평균 평점을 상품 이름, 종류와 함께 출력하시오
-
+## 방법 1 - UNION
 ```sql
 SELECT items.name, items.item_type, AVG(items.rating)
 FROM
@@ -112,6 +111,60 @@ GROUP BY items.name, items.item_type;
 |     "연어"     | "canned_food" |     2      |
 |    "진라멘"    |    "ramen"    |     4      |
 |   "추풍라면"   |    "ramen"    |     1      |
+
+### 방법 2 - OUTTER JOIN!!
+지독하게 단순한 방법 <br>
+
+꼭 이해해서 숙지하자!
+1. rating에서 아이템 타입과 아이디, 레이팅을 가져온다. (`GROUP BY`는 필드에 보이기 위해 사용)
+2. **RIGHT JOIN을 아주 멋있게 사용했다!!**
+
+
+**결국 레이팅에는 아이템의 타입과, 그 타입 안에서의 id를 가지고 있고, 이름은 없는 상황인건데** <br>
+**name이 있는 테이블에서는 id를 통해 매칭한다 그리고 아주 중요한 부분인데, 각 테이블 명을 item_type으로 써 주었다!!** <br>
+
+내가 생각하지 못한 부분이 바로 여기다!! 꼭 여러번 봐서 숙지하도록 하자!! <br>
+
+### 모든 상품의 평균 평점을 상품 이름, 상품 종류와 함께 출력하는 쿼리문
+```sql
+SELECT name, item_type, rating
+FROM
+(
+  SELECT item_type, item_id, avg(rating.rating) as rating
+  FROM rating
+  GROUP BY item_type, item_id
+) rating
+RIGHT JOIN
+(
+  (SELECT name, id AS item_id, 'drink' AS item_type FROM drink)
+  UNION ALL
+  (SELECT name, id AS item_id, 'ramen' AS item_type FROM ramen)
+  UNION ALL
+  (SELECT name, id AS item_id, 'canned_food' AS item_type FROM canned_food)
+) items
+USING (item_id, item_type)
+```
+
+결과는 아래와 같이 나오게 된다.
+
+|      name      |   item_type   | rating |
+| :------------: | :-----------: | :----: |
+| "에너지드링크" |    "drink"    |   1    |
+|  "오렌지주스"  |    "drink"    |  null  |
+|   "무안단물"   |    "drink"    |  null  |
+|   "순진맥주"   |    "drink"    |  null  |
+|     "더맛"     |    "drink"    |   3    |
+|  "오랜지주스"  |    "drink"    |  null  |
+|    "진라멘"    |    "ramen"    |   4    |
+|  "고추짜장면"  |    "ramen"    |   1    |
+|   "리얼짬뽕"   |    "ramen"    |  null  |
+|   "추풍라면"   |    "ramen"    |   1    |
+|  "겨울이라면"  |    "ramen"    |   2    |
+|     "참치"     | "canned_food" |  null  |
+|   "고추참치"   | "canned_food" |  null  |
+|     "연어"     | "canned_food" |   2    |
+|  "곰과 연어"   | "canned_food" |   1    |
+|     "삼치"     | "canned_food" |   3    |
 
 
 ## 6. Trigger와 함수
