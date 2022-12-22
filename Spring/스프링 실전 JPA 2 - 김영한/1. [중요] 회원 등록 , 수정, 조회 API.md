@@ -1,0 +1,187 @@
+# 1.1 회원 등록, 수정, 조회
+## 1 `@RequestBody`
+```java
+@RestController
+@RequiredArgsConstructor
+public class MemberApiController {
+
+    private final MemberService memberService;
+
+    @PostMapping("/api/v1/members")
+    public CreateMemberResponse saveMemberV1(@RequestBody @Valid Member member) {
+        Long id = memberService.joinMember(member);
+        return new CreateMemberResponse(id);
+    }
+
+    @Data
+    static class CreateMemberResponse {
+        private Long id;
+
+        public CreateMemberResponse(Long id) {
+            this.id = id;
+        }
+    }
+}
+```
+api 형태로 만든 회원 등록 로직이다. PostMapping에서 `@RequestBody`를 사용했는데, 이는 **JSON형식으로 들어온 Request에서 값들을 매핑해서 Member 엔티티를 생성해주는 것이다.** <br> 
+예를 들어 `{ "name": "jinhoho" }`라는 입력이 들어왔다면, name이 jinhoho인 맴버가 만들어 져서, 파라미터로 들어오는 것이다. <br>
+**`@Valid` 덕분에 Member 엔티티에 걸어 놓은 제약 조건들도 검증이 거쳐진다.**
+
+ 
+## 1.2 API 만들 때 DTO를 도입해야 하는 이유
+### 엔티티를 외부에 노출시키거나, 파라미터로 이용해서는 안 된다!
+
+그런데 앞서 보인 V1 API의 설계는 문제점이 있다. 지금 Member 엔티티가 파라미터로 쓰였는데, **API를 만들 때는 엔티티가 파라미터로 쓰이거나 외부로 노출되어서는 안 된다.** <br>
+
+만약 Member 엔티티에 변화가 생긴다면 어떻게 될까? Member의 이름이 name에서 username으로 변한다면? **API의 스펙 자체가 바뀌게 된다.** <br>
+이는 끔찍한 결과를 초래할 수 있다. (당연) 따라서 **DTO의 도입이 필요하다.**
+
+```java
+@RestController
+@RequiredArgsConstructor
+public class MemberApiController {
+
+    private final MemberService memberService;
+
+    @PostMapping("/api/v2/members")
+    public CreateMemberResponse saveMemberV2(@RequestBody @Valid CreateMemberRequest request) {
+
+        Member member = new Member();
+        member.setName(request.getName());
+
+        Long id = memberService.joinMember(member);
+        return new CreateMemberResponse(id);
+    }
+
+    // DTO!
+    @Data
+    static class CreateMemberRequest {
+        @NotEmpty
+        private String name;
+    }
+}
+```
+**Request를 받는 DTO를 따로 만든 다음, 거기서 name을 받아준다면, Member 엔티티의 스펙이 변경되어도 request에서는 name으로 받기 때문에, API 스펙이 바뀌지 않는다!** <br>
+약 1시간 전에 DTO가 왜 있고 왜 필요한지 고민했는데, 귀신같이 이유가 설명되어서 기분이 좋다 ㅎㅎ
+
+
+# 1.2 회원 수정 API
+```java
+@RestController
+@RequiredArgsConstructor
+public class MemberApiController {
+
+    private final MemberService memberService;
+
+    @PutMapping("/api/v2/members/{id}")
+    public UpdateMemberResponse updateMemberV2(@PathVariable Long id,
+                                               @RequestBody @Valid UpdateMemberRequest request) {
+        memberService.update(id, request.getName());
+        Member findMember = memberService.findMember(id);
+        return new UpdateMemberResponse(findMember.getId(), findMember.getName());
+    }
+
+    @Data
+    static class UpdateMemberRequest {
+        private String name;
+    }
+
+    @Data
+    @AllArgsConstructor
+    static class UpdateMemberResponse {
+        private Long id;
+        private String name;
+    }
+}
+```
+간단하다. `@AllArgsConstructor` 이용해서 id와 name을 무조건 넣어 주도록 해주었다. <br> 
+update에서 영속성이 끊긴 Member를 반환하지 않도록 하는 것도 중요하다. <br>
+
+# 1.3 회원 조회 API
+## V1. 회원 어레이 반환 
+```java
+@GetMapping("/api/v1/members")
+public List<Member> membersV1() {
+    return memberService.findAllMembers();
+}
+```
+끝 <br>
+일까? 문제점 
+1. 회원 정보만 얻으면 되는데, 쓸대없는 Member 안에 있는 `List<Order> orders`가 딸려온다. <br> 이는 `@JsonIgnore`로 특정 필드가 오지 않도록 할 수 있지만, 또 어디선가는 맴버와 Orders가 같이 필요할 수도 있잖아? <br> **이런 식으로는 모든 상황에 대처할 수가 없다.**
+```java
+@Entity
+@Getter @Setter
+public class Member {
+
+    ... 생략
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "member")
+    private List<Order> orders = new ArrayList<>();
+}
+```
+2. 엔티티 변경에 또 API 스펙이 변경될 수가 있다.
+3. Array를 바로 반환하면, 확장에 매우 약하다. 원하는 정보를 끼어 넣을 수가 없는 것이다.
+
+## V2. 응답 값 껍데기 클래스 만들기.
+다른 곳에서 하는거랑 비슷해 보인다.
+
+```java
+@RestController
+@RequiredArgsConstructor
+public class MemberApiController {
+
+    private final MemberService memberService;
+
+    @GetMapping("/api/v2/members")
+    public Result membersV2() {
+        List<Member> members = memberService.findAllMembers();
+        List<MemberDto> collect = members.stream()
+                .map(member -> new MemberDto(member.getName())).
+                collect(Collectors.toList());
+        return new Result(collect);
+    }
+
+    @Data
+    @AllArgsConstructor
+    static class Result<T> {
+        private T data;
+    }
+
+    @Data
+    @AllArgsConstructor
+    static class MemberDto {
+        private String name;
+    }
+}
+```
+1. 맴버 가져오기
+2. 맴버 DTO로 가공
+3. Result에 담아서 보낸다.
+이름만 담긴 아름다운 결과물이 나온다. <br>
+**필요한 것만 딱 노출할 수 있다!!!**
+
+
+<br>
+
+확장을 하고 싶다면? 예를 들어 맴버 수를 알고 싶다.
+
+```java
+  @GetMapping("/api/v2/members")
+  public Result membersV2() {
+      List<Member> members = memberService.findAllMembers();
+      List<MemberDto> collect = members.stream()
+              .map(member -> new MemberDto(member.getName())).
+              collect(Collectors.toList());
+      return new Result(collect.size(), collect);
+  }
+
+  @Data
+  @AllArgsConstructor
+  static class Result<T> {
+      private int count;
+      private T data;
+  }
+```
+
+이런 확장 또한 너무 쉽다!
