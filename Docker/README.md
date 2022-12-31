@@ -62,6 +62,12 @@
 이미지를 만드는 과정을 자체 언어로 기록하고 저장하는 `Dockerfile`이 있기 때문에 따로 어디에 기록할 필요 없고, 무거운 Docker Image들을 쉽게 저장하고 다운받을 수 있도록 `Docker Hub`를 무료로 제공해준다. Command와 API도 매우 잘 만들어진 편이며, 불편사항이나 피드백을 빠르게 반영하고, 커뮤니티 또한 활발하다. <br>
 그리고 캐릭터가 귀엽다.. 도커는 짱이다 도커는 신이다 도커하자.
 
+
+## Hello! Docker!
+
+![hello](https://user-images.githubusercontent.com/71186266/210127052-25283cdc-179f-4975-ae9f-91ccdae7ab82.png)
+
+
 ## Reference
 - [따라하면서 배우는 도커와 CI 환경](https://www.inflearn.com/course/%EB%94%B0%EB%9D%BC%ED%95%98%EB%A9%B0-%EB%B0%B0%EC%9A%B0%EB%8A%94-%EB%8F%84%EC%BB%A4-ci/dashboard)
 - [초보를 위한 도커 안내서 - 도커란 무엇인가?](https://subicura.com/2017/01/19/docker-guide-for-beginners-1.html)
