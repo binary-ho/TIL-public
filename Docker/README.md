@@ -63,11 +63,18 @@
 그리고 캐릭터가 귀엽다.. 도커는 짱이다 도커는 신이다 도커하자.
 
 
-## Hello! Docker!
+# Hello! Docker!
+안녕! 도커!
+  
+![hello](https://user-images.githubusercontent.com/71186266/210127133-e9a344e1-ad14-4114-a44f-7f4057522b26.png)
 
-![hello](https://user-images.githubusercontent.com/71186266/210127052-25283cdc-179f-4975-ae9f-91ccdae7ab82.png)
-
-
+1. 도커 클라이언트 (Windows Power Shell)에 `docker run hello-world`를 입력했다.
+2. 명령어가 도커 서버로 이동된다.
+3. **서버는 이미지 Cache 보관 장소에서 hello-world라는 이미지가 있는지 확인한다.**
+4. 위의 캡쳐에서는 해당 이미지가 캐시 보관 장소에 없어서, Unable to find image라는 문구가 나왔다.
+5. 없는 경우 도커 허브에서 이미지를 가져온다! 이후, 실행한다.
+6. **Hello! Docker!**
+  
 ## Reference
 - [따라하면서 배우는 도커와 CI 환경](https://www.inflearn.com/course/%EB%94%B0%EB%9D%BC%ED%95%98%EB%A9%B0-%EB%B0%B0%EC%9A%B0%EB%8A%94-%EB%8F%84%EC%BB%A4-ci/dashboard)
 - [초보를 위한 도커 안내서 - 도커란 무엇인가?](https://subicura.com/2017/01/19/docker-guide-for-beginners-1.html)
