@@ -39,7 +39,7 @@ static <T> T[] toArray(T... args) {
 그래서 `@SafeVarargs` 어노테이션이 있는 것이다. <Br>
 가변 매개변수를 인수로 갖는 제네릭 메서드는 반환값과 관련된 제네릭 메서드를 사용할 때 `@SafeVarargs` 어노테이션이 붙은 메서드만 사용해야 한다. <br>
 그러니까 항상 기본적으로 안전한 varargs 메서드를 작성해야하고, <br>  
-`@SafeVarargs`를 달아줘야 한다. <br>
-
+`@SafeVarargs`를 달아주고! `@SafeVarargs`달린 친구들과만 놀아야 한다! <br>
+아니면 반환 타입에 공변인 배열 대신 List를 적극 활용하라 (아이템 28)
 ## Reference
 - Effective Java <조슈아 블로크>
