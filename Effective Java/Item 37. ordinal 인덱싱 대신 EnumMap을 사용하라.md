@@ -183,7 +183,22 @@ public enum Phase {
 PLASMA와 IONIZE, DEIONIZE이 추가된 버전이다. <br>
 이전 상태에서는 사이즈가 제곱으로 커지니, null이 계속해서 추가되니, 신중하게 배열을 짜지 않으면 아예 순서가 꼬이느니 여러 단점이 있었는데 <br>
 이렇게 해주면 그냥 3개만 더 적어주고 끝낼 수 있다. <Br>
-#### `PLASMA`, `IONIZE(GAS, PLASMA)`, `DEIONIZE(PLASMA, GAS)` 끝!
+#### `PLASMA`, `IONIZE(GAS, PLASMA)`, `DEIONIZE(PLASMA, GAS)` 끝! 너무 쉽다!
 
+    
+## 그냥 Map을 사용할 때와 EnumMap을 사용할 때의 차이
+멘토링 과정에서 멘토님이 질문하신 Enum을 HashMap을 사용하여 다룰 때와 EnumMap을 사용하여 다룰 때의 차이에 대한 나의 답변을 첨부하겠다.
+```
+Enum을 사용할 때 EnumMap을 사용하는 것과 HashMap을 사용하는 것의 차이는 내부에 key-value를 저장하는 방식에서 옵니다.
+
+HashMap은 이름대로 해시 테이블을 운용하며, 해싱된 key를 내부 버킷 하나에 매핑하여 value들을 연결 리스트와 같은 자료구조에 주렁주렁 달아가며 저장합니다.
+그리고 EnumMap은 Enum을 사용하기 위해 최적화된 Map으로 내부적으로 key 값들을 배열에 저장합니다. 
+클래스가 운용할 열거 상수의 갯수가 정해져 있으므로, 열거 상수의 갯수에 맞는 사이즈에 배열을 만들어 관리합니다.
+덕분에 탐색시간은 O(1)에 가깝고, 최대한 적은 메모리를 사용합니다.
+
+물론 HashMap 또한 해쉬 테이블을 사용하므로 정말 빠르지만, 버킷에 value들이 쌓이다 보면 시간 복잡도는 증가할 수 밖에 없습니다.
+또 불필요한 해싱 과정에 드는 시간이나, Iterator 없이 순회할 수 있다는 점도 장점입니다.
+``` 
+    
 ## Reference
 - Effective Java <조슈아 블로크>
