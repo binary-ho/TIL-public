@@ -1,0 +1,563 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>유튜브 Only HTML</title>
+  <style>
+    #view {
+      margin: 0;
+      padding: 0;
+    }
+
+    .header {
+      position: sticky;
+      top: 0;
+      padding: 0px 30px;
+
+      background-color: white;
+    }
+
+    .flex-row-space-between {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .flex-row-center {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .flex-column {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .grey-bakcground {
+      /* 탭을 눌러 기본적인 간격 분석 
+            -> 기본적인 위 아래 간격이 있네? 
+            인라인 요소가 더 강하니까 세부 설정은 인라인으로 하자! */
+      margin: 10px;
+      padding: 10px;
+      border-radius: 50%;
+    }
+
+    .grey-bakcground:hover {
+      background-color: grey;
+      cursor: pointer;
+    }
+
+    .pointer:hover {
+      cursor: pointer;
+    }
+
+    #search-bar {
+      width: 450px;
+      border: 3px solid grey;
+      border-radius: 20px;
+      padding: 5px 10px;
+      color: grey;
+      display: flex;
+      flex-direction: row;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: row;
+      background-color: white;
+      margin: 50px;
+    }
+
+    .main-container {
+      width: 70vw;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+
+    .aside-container {
+      width: 30vw;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+
+    .video-container {
+      flex-grow: 3;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+    }
+
+    .video-info-container {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .creater-container {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+
+    .comment-box {
+      display: flex;
+      flex-direction: row;
+      margin: 10px;
+    }
+
+    .comment-text-area {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .comment-input-box {
+      display: flex;
+      flex-direction: row;
+      margin: 10px;
+      align-items: center;
+    }
+
+    .profile-thumbnail {
+      width: 50px;
+      height: 50px;
+      margin: 5px;
+      border-radius: 25px;
+    }
+
+    .like-hate-area {
+      display: flex;
+      flex-direction: row;
+    }
+
+    .video-thumbnail-box {
+      display: flex;
+      flex-direction: row;
+      margin: 10px;
+    }
+
+    .video-thumbnail {
+      width: 15%;
+      margin: 5px;
+    }
+
+    .grey-button {
+      background-color: whitesmoke;
+      border-radius: 25px;
+      padding: 15px;
+      margin: 10px;
+    }
+
+    .grey-button:hover {
+      background-color: lightgray;
+    }
+
+    input:focus {
+      outline: none;
+    }
+  </style>
+</head>
+
+<body style="width: 100vw; margin: 0; padding: 0;">
+  <div id="view">
+    <div class="header flex-row-space-between">
+      <div class="flex-row-center">
+        <div class="grey-bakcground">🍔</div>
+        <div class="pointer" style="font-weight: bold; margin-left: 30px;">GDSC</div>
+      </div>
+
+      <div class="flex-row-center" style="margin: 5px;">
+        <div id="search-bar">
+          <input style="width: 93%; border: none;" placeholder="검색" />
+          <div class="pointer" style="background-color: white; border: none;">🔍</div>
+        </div>
+        <div class="grey-bakcground">🎤 </div>
+      </div>
+
+      <div class="flex-row-center">
+        <div class="grey-bakcground">📽️ </div>
+        <div class="grey-bakcground">🔔</div>
+        <div class="grey-bakcground">💩</div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="main-container">
+        <div class="video-container">
+          <img
+            src="https://user-images.githubusercontent.com/71186266/222961900-8528af30-d286-460d-b36c-91b11c8caa34.png" />
+        </div>
+
+        <div class="video-info-container">
+          <h1>[충격, 공포] GDSC의 충격적인 실체.....</h1>
+          <div class="flex-row-space-between">
+            <div class="creater-container">
+              <img class="profile-thumbnail"
+                src="https://user-images.githubusercontent.com/71186266/222961900-8528af30-d286-460d-b36c-91b11c8caa34.png" />
+              <div class="flex-column" style="margin: 5px;">
+                <p style="font-size: 15px; font-weight: bold; margin: 5px;">고라니맨</p>
+                <p style="font-size: 10px; margin: 5px;">구독자 5억명</p>
+              </div>
+              <div class="grey-button">🔔 구독중</div>
+            </div>
+
+            <div class="flex-row-center">
+              <div class="grey-button">👍 10억</div>
+              <div class="grey-button">↗️ 공유</div>
+              <div class="grey-button"> 🔽 오프라인 저장</div>
+              <div class="grey-button"> ❤️ Thanks</div>
+              <div class="grey-button">✂️ 클립</div>
+              <div class="grey-button">...</div>
+            </div>
+          </div>
+          <div class="grey-button" style="width: 95%;">
+            <div>GDSC는 사실 XXX다?</div>
+            <div>정보들..</div>
+            <div>정보들..</div>
+          </div>
+        </div>
+
+        <!-- 댓글 컨테이너 -->
+        <div class=" comment-container">
+
+          <!-- 댓글 입력 -->
+          <div class="comment-input-box">
+            <img class="profile-thumbnail"
+              src="https://user-images.githubusercontent.com/71186266/222961900-8528af30-d286-460d-b36c-91b11c8caa34.png" />
+            <input
+              style="height: 25px; width: 90%; border-top: none; border-left: none; border-right: none; border-bottom: 1px solid; margin: 20px;"
+              placeholder="댓글 추가...">
+          </div>
+
+          <!-- 댓글 목록 -->
+          <div class="comment-box">
+            <img class="profile-thumbnail"
+              src="https://user-images.githubusercontent.com/71186266/222961900-8528af30-d286-460d-b36c-91b11c8caa34.png" />
+            <div class="comment-text-area">
+              <div style="font-weight: bold;"> 고라니 </div>
+              <div>GDSC! GDSC! GDSC! GDSC!</div>
+              <div class="like-hate-area">
+                <div>👍</div>
+                <div>1m</div>
+                <div>👎</div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="comment-box">
+            <img class="profile-thumbnail"
+              src="https://user-images.githubusercontent.com/71186266/222961900-8528af30-d286-460d-b36c-91b11c8caa34.png" />
+            <div class="comment-text-area">
+              <div style="font-weight: bold;"> 고라니 </div>
+              <div>GDSC! GDSC! GDSC! GDSC!</div>
+              <div class="like-hate-area">
+                <div>👍</div>
+                <div>1m</div>
+                <div>👎</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="comment-box">
+            <img class="profile-thumbnail"
+              src="https://user-images.githubusercontent.com/71186266/222961900-8528af30-d286-460d-b36c-91b11c8caa34.png" />
+            <div class="comment-text-area">
+              <div style="font-weight: bold;"> 고라니 </div>
+              <div>GDSC! GDSC! GDSC! GDSC!</div>
+              <div class="like-hate-area">
+                <div>👍</div>
+                <div>1m</div>
+                <div>👎</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="comment-box">
+            <img class="profile-thumbnail"
+              src="https://user-images.githubusercontent.com/71186266/222961900-8528af30-d286-460d-b36c-91b11c8caa34.png" />
+            <div class="comment-text-area">
+              <div style="font-weight: bold;"> 고라니 </div>
+              <div>GDSC! GDSC! GDSC! GDSC!</div>
+              <div class="like-hate-area">
+                <div>👍</div>
+                <div>1m</div>
+                <div>👎</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="comment-box">
+            <img class="profile-thumbnail"
+              src="https://user-images.githubusercontent.com/71186266/222961900-8528af30-d286-460d-b36c-91b11c8caa34.png" />
+            <div class="comment-text-area">
+              <div style="font-weight: bold;"> 고라니 </div>
+              <div>GDSC! GDSC! GDSC! GDSC!</div>
+              <div class="like-hate-area">
+                <div>👍</div>
+                <div>1m</div>
+                <div>👎</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="comment-box">
+            <img class="profile-thumbnail"
+              src="https://user-images.githubusercontent.com/71186266/222961900-8528af30-d286-460d-b36c-91b11c8caa34.png" />
+            <div class="comment-text-area">
+              <div style="font-weight: bold;"> 고라니 </div>
+              <div>GDSC! GDSC! GDSC! GDSC!</div>
+              <div class="like-hate-area">
+                <div>👍</div>
+                <div>1m</div>
+                <div>👎</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="comment-box">
+            <img class="profile-thumbnail"
+              src="https://user-images.githubusercontent.com/71186266/222961900-8528af30-d286-460d-b36c-91b11c8caa34.png" />
+            <div class="comment-text-area">
+              <div style="font-weight: bold;"> 고라니 </div>
+              <div>GDSC! GDSC! GDSC! GDSC!</div>
+              <div class="like-hate-area">
+                <div>👍</div>
+                <div>1m</div>
+                <div>👎</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="comment-box">
+            <img class="profile-thumbnail"
+              src="https://user-images.githubusercontent.com/71186266/222961900-8528af30-d286-460d-b36c-91b11c8caa34.png" />
+            <div class="comment-text-area">
+              <div style="font-weight: bold;"> 고라니 </div>
+              <div>GDSC! GDSC! GDSC! GDSC!</div>
+              <div class="like-hate-area">
+                <div>👍</div>
+                <div>1m</div>
+                <div>👎</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="comment-box">
+            <img class="profile-thumbnail"
+              src="https://user-images.githubusercontent.com/71186266/222961900-8528af30-d286-460d-b36c-91b11c8caa34.png" />
+            <div class="comment-text-area">
+              <div style="font-weight: bold;"> 고라니 </div>
+              <div>GDSC! GDSC! GDSC! GDSC!</div>
+              <div class="like-hate-area">
+                <div>👍</div>
+                <div>1m</div>
+                <div>👎</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="comment-box">
+            <img class="profile-thumbnail"
+              src="https://user-images.githubusercontent.com/71186266/222961900-8528af30-d286-460d-b36c-91b11c8caa34.png" />
+            <div class="comment-text-area">
+              <div style="font-weight: bold;"> 고라니 </div>
+              <div>GDSC! GDSC! GDSC! GDSC!</div>
+              <div class="like-hate-area">
+                <div>👍</div>
+                <div>1m</div>
+                <div>👎</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="aside-container">
+
+        <!-- 영상 썸네일 -->
+
+        <div class="video-thumbnail-box">
+          <img class="video-thumbnail"
+            src="https://user-images.githubusercontent.com/71186266/222961900-8528af30-d286-460d-b36c-91b11c8caa34.png" />
+          <div class="comment-text-area">
+            <div style="font-weight: bold; font-size: 20px;"> [충격, 공포] GDSC의 충격적인 실체 </div>
+            <div style="color: gray">고라니TV</div>
+            <div style="color: gray">조회수 1억회 - 1시간 전</div>
+          </div>
+        </div>
+
+        <div class="video-thumbnail-box">
+          <img class="video-thumbnail"
+            src="https://user-images.githubusercontent.com/71186266/222961900-8528af30-d286-460d-b36c-91b11c8caa34.png" />
+          <div class="comment-text-area">
+            <div style="font-weight: bold; font-size: 20px;"> [충격, 공포] GDSC의 충격적인 실체 </div>
+            <div style="color: gray">고라니TV</div>
+            <div style="color: gray">조회수 1억회 - 1시간 전</div>
+          </div>
+        </div>
+
+        <div class="video-thumbnail-box">
+          <img class="video-thumbnail"
+            src="https://user-images.githubusercontent.com/71186266/222961900-8528af30-d286-460d-b36c-91b11c8caa34.png" />
+          <div class="comment-text-area">
+            <div style="font-weight: bold; font-size: 20px;"> [충격, 공포] GDSC의 충격적인 실체 </div>
+            <div style="color: gray">고라니TV</div>
+            <div style="color: gray">조회수 1억회 - 1시간 전</div>
+          </div>
+        </div>
+
+        <div class="video-thumbnail-box">
+          <img class="video-thumbnail"
+            src="https://user-images.githubusercontent.com/71186266/222961900-8528af30-d286-460d-b36c-91b11c8caa34.png" />
+          <div class="comment-text-area">
+            <div style="font-weight: bold; font-size: 20px;"> [충격, 공포] GDSC의 충격적인 실체 </div>
+            <div style="color: gray">고라니TV</div>
+            <div style="color: gray">조회수 1억회 - 1시간 전</div>
+          </div>
+        </div>
+
+        <div class="video-thumbnail-box">
+          <img class="video-thumbnail"
+            src="https://user-images.githubusercontent.com/71186266/222961900-8528af30-d286-460d-b36c-91b11c8caa34.png" />
+          <div class="comment-text-area">
+            <div style="font-weight: bold; font-size: 20px;"> [충격, 공포] GDSC의 충격적인 실체 </div>
+            <div style="color: gray">고라니TV</div>
+            <div style="color: gray">조회수 1억회 - 1시간 전</div>
+          </div>
+        </div>
+
+        <div class="video-thumbnail-box">
+          <img class="video-thumbnail"
+            src="https://user-images.githubusercontent.com/71186266/222961900-8528af30-d286-460d-b36c-91b11c8caa34.png" />
+          <div class="comment-text-area">
+            <div style="font-weight: bold; font-size: 20px;"> [충격, 공포] GDSC의 충격적인 실체 </div>
+            <div style="color: gray">고라니TV</div>
+            <div style="color: gray">조회수 1억회 - 1시간 전</div>
+          </div>
+        </div>
+
+        <div class="video-thumbnail-box">
+          <img class="video-thumbnail"
+            src="https://user-images.githubusercontent.com/71186266/222961900-8528af30-d286-460d-b36c-91b11c8caa34.png" />
+          <div class="comment-text-area">
+            <div style="font-weight: bold; font-size: 20px;"> [충격, 공포] GDSC의 충격적인 실체 </div>
+            <div style="color: gray">고라니TV</div>
+            <div style="color: gray">조회수 1억회 - 1시간 전</div>
+          </div>
+        </div>
+
+        <div class="video-thumbnail-box">
+          <img class="video-thumbnail"
+            src="https://user-images.githubusercontent.com/71186266/222961900-8528af30-d286-460d-b36c-91b11c8caa34.png" />
+          <div class="comment-text-area">
+            <div style="font-weight: bold; font-size: 20px;"> [충격, 공포] GDSC의 충격적인 실체 </div>
+            <div style="color: gray">고라니TV</div>
+            <div style="color: gray">조회수 1억회 - 1시간 전</div>
+          </div>
+        </div>
+
+        <div class="video-thumbnail-box">
+          <img class="video-thumbnail"
+            src="https://user-images.githubusercontent.com/71186266/222961900-8528af30-d286-460d-b36c-91b11c8caa34.png" />
+          <div class="comment-text-area">
+            <div style="font-weight: bold; font-size: 20px;"> [충격, 공포] GDSC의 충격적인 실체 </div>
+            <div style="color: gray">고라니TV</div>
+            <div style="color: gray">조회수 1억회 - 1시간 전</div>
+          </div>
+        </div>
+
+        <div class="video-thumbnail-box">
+          <img class="video-thumbnail"
+            src="https://user-images.githubusercontent.com/71186266/222961900-8528af30-d286-460d-b36c-91b11c8caa34.png" />
+          <div class="comment-text-area">
+            <div style="font-weight: bold; font-size: 20px;"> [충격, 공포] GDSC의 충격적인 실체 </div>
+            <div style="color: gray">고라니TV</div>
+            <div style="color: gray">조회수 1억회 - 1시간 전</div>
+          </div>
+        </div>
+
+        <div class="video-thumbnail-box">
+          <img class="video-thumbnail"
+            src="https://user-images.githubusercontent.com/71186266/222961900-8528af30-d286-460d-b36c-91b11c8caa34.png" />
+          <div class="comment-text-area">
+            <div style="font-weight: bold; font-size: 20px;"> [충격, 공포] GDSC의 충격적인 실체 </div>
+            <div style="color: gray">고라니TV</div>
+            <div style="color: gray">조회수 1억회 - 1시간 전</div>
+          </div>
+        </div>
+
+        <div class="video-thumbnail-box">
+          <img class="video-thumbnail"
+            src="https://user-images.githubusercontent.com/71186266/222961900-8528af30-d286-460d-b36c-91b11c8caa34.png" />
+          <div class="comment-text-area">
+            <div style="font-weight: bold; font-size: 20px;"> [충격, 공포] GDSC의 충격적인 실체 </div>
+            <div style="color: gray">고라니TV</div>
+            <div style="color: gray">조회수 1억회 - 1시간 전</div>
+          </div>
+        </div>
+
+        <div class="video-thumbnail-box">
+          <img class="video-thumbnail"
+            src="https://user-images.githubusercontent.com/71186266/222961900-8528af30-d286-460d-b36c-91b11c8caa34.png" />
+          <div class="comment-text-area">
+            <div style="font-weight: bold; font-size: 20px;"> [충격, 공포] GDSC의 충격적인 실체 </div>
+            <div style="color: gray">고라니TV</div>
+            <div style="color: gray">조회수 1억회 - 1시간 전</div>
+          </div>
+        </div>
+
+        <div class="video-thumbnail-box">
+          <img class="video-thumbnail"
+            src="https://user-images.githubusercontent.com/71186266/222961900-8528af30-d286-460d-b36c-91b11c8caa34.png" />
+          <div class="comment-text-area">
+            <div style="font-weight: bold; font-size: 20px;"> [충격, 공포] GDSC의 충격적인 실체 </div>
+            <div style="color: gray">고라니TV</div>
+            <div style="color: gray">조회수 1억회 - 1시간 전</div>
+          </div>
+        </div>
+
+        <div class="video-thumbnail-box">
+          <img class="video-thumbnail"
+            src="https://user-images.githubusercontent.com/71186266/222961900-8528af30-d286-460d-b36c-91b11c8caa34.png" />
+          <div class="comment-text-area">
+            <div style="font-weight: bold; font-size: 20px;"> [충격, 공포] GDSC의 충격적인 실체 </div>
+            <div style="color: gray">고라니TV</div>
+            <div style="color: gray">조회수 1억회 - 1시간 전</div>
+          </div>
+        </div>
+
+        <div class="video-thumbnail-box">
+          <img class="video-thumbnail"
+            src="https://user-images.githubusercontent.com/71186266/222961900-8528af30-d286-460d-b36c-91b11c8caa34.png" />
+          <div class="comment-text-area">
+            <div style="font-weight: bold; font-size: 20px;"> [충격, 공포] GDSC의 충격적인 실체 </div>
+            <div style="color: gray">고라니TV</div>
+            <div style="color: gray">조회수 1억회 - 1시간 전</div>
+          </div>
+        </div>
+
+        <div class="video-thumbnail-box">
+          <img class="video-thumbnail"
+            src="https://user-images.githubusercontent.com/71186266/222961900-8528af30-d286-460d-b36c-91b11c8caa34.png" />
+          <div class="comment-text-area">
+            <div style="font-weight: bold; font-size: 20px;"> [충격, 공포] GDSC의 충격적인 실체 </div>
+            <div style="color: gray">고라니TV</div>
+            <div style="color: gray">조회수 1억회 - 1시간 전</div>
+          </div>
+        </div>
+
+        <!-- 영상 썸네일 끝 -->
+
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
