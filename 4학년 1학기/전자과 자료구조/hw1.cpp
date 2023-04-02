@@ -7,45 +7,156 @@
 
 using namespace std;
 
+void charPointerCopy(char *ori, char *target) {
+    while ((*ori++ = *target++) != '\0');
+}
+
+
+bool compareToName(char *left, char *right) {
+    int index = 0;
+    while (index < 8) {
+        if (left[index] == '\0') {
+            return true;
+        }
+
+        if (right[index] == '\0') {
+            return false;
+        }
+
+        if (left[index] > right[index]) {
+            return true;
+        } else if (left[index] < right[index]) {
+            return false;
+        }
+
+        index++;
+    }
+
+    return false;
+}
+
+bool equals(char *left, char *right) {
+    int index = 0;
+    while (index < 9) {
+        if (left[index] == '\0' && right[index] == '\0') {
+            return true;
+        } else if (left[index] == '\0' || right[index] == '\0') {
+            return false;
+        } else if (left[index] != right[index]) {
+            return false;
+        }
+        index++;
+    }
+    return false;
+}
+
 struct Student {
     int num;
     char name[10];
     int score;
 };
 
-// 2. DB는 파일에 저 장 되 어 있고, 검색/삽입/삭제/소팅 등의 동작을 수행할 수있다.
-// 인 터 페 이 스 명 령 어 는
-// 1) insert num name height score : 번호의 위치에 해당 레 코 드 를 삽입
-// 2) delete name : 입력 이름에 해 당 하 는 레 코 드 를 삭제
-// 3) list name : 입력 이름에 해 당 하 는 레 코 드의 기록을 보여줌
-// 4) sort name : 이름순으로 정렬
-// 5) sort score : 성적순으로 정렬
-// 6) read DB이름 : 해당 파일을 read목적으로 open 하고 data를 메모리로 읽음
-// 7) write DB이름 : 해당 파일을 write목적으로 open 하고 파일에 내용을 적음.
-
 class Students {
 
 public:
     Students() {
         studentSize = INIT_STUDENT_NUM;
-        students = (Student *) malloc(studentSize * sizeof(Student));
+        maxSize = 2 * INIT_STUDENT_NUM;
+        students = (Student *) malloc(maxSize * sizeof(Student));
         generateMockStudent(studentSize);
     }
 
+    void insertRecord(int index, char *name, int score);
+    void deleteByName(char *name);
+    void listByName(char *name);
+
+    void sortByName();
+    void sortByScore();
+
     void readDB(char name[]);
     void writeDB(char name[]);
-    void insertSortByScore();
-    void insertSortByName();
+
     void printStudentsInfo();
 
 private:
+    int maxSize;
     int studentSize;
     Student *students;
 
     void validateFileNotNull(FILE *file);
-
     void generateMockStudent(int studentCount);
+    void resizeArrayDouble();
+    int getRecordIndexByNameMatchFirst(char *name);
+    Student parseStudentInfo(char *studentInfoString, int index);
 };
+
+void Students::resizeArrayDouble() {
+    maxSize *= 2;
+    Student *temp = (Student *) malloc(maxSize * sizeof(Student));
+    for (int i = 0; i < studentSize; i++) {
+        temp[i] = students[i];
+    }
+    students = temp;
+}
+
+void Students::insertRecord(int index, char *name, int score) {
+    if (studentSize == maxSize) {
+        resizeArrayDouble();
+    }
+
+    Student *temp = (Student *) malloc(maxSize * sizeof(Student));
+    for (int i = index; i < studentSize; i++) {
+        temp[i] = students[i];
+    }
+
+    students[index].num = index;
+    charPointerCopy(students[index].name, name);
+    students[index].score = score;
+
+    for (int i = index; i < studentSize; i++) {
+        students[i + 1] = temp[i];
+        students[i + 1].num = i + 1;
+    }
+    studentSize++;
+}
+
+int Students::getRecordIndexByNameMatchFirst(char *name) {
+    for (int index = 0; index < studentSize; index++) {
+        if(!equals(students[index].name, name)) {
+            continue;
+        }
+        return index;
+    }
+    printf("no user\n");
+    return -1;
+}
+
+void Students::deleteByName(char *name) {
+    int targetIndex = getRecordIndexByNameMatchFirst(name);
+    if (targetIndex == -1) {
+        return;
+    }
+
+    Student *temp = (Student *) malloc(maxSize * sizeof(Student));
+    for (int i = targetIndex + 1; i < studentSize; i++) {
+        temp[i] = students[i];
+    }
+
+    for (int i = targetIndex + 1; i < studentSize; i++) {
+        students[i - 1] = temp[i];
+        students[i - 1].num = i - 1;
+    }
+    studentSize--;
+}
+
+void Students::listByName(char *name) {
+    int targetIndex = getRecordIndexByNameMatchFirst(name);
+    if (targetIndex == -1) {
+        return;
+    }
+
+    printf("%d,%s,%d\n", students[targetIndex].num, students[targetIndex].name, students[targetIndex].score);
+}
 
 void Students::validateFileNotNull(FILE *file) {
     if (file == NULL) {
@@ -65,11 +176,7 @@ void Students::writeDB(char *name) {
     fclose(file);
 }
 
-void charPointerCopy(char *ori, char *target) {
-    while ((*ori++ = *target++) != '\0');
-}
-
-Student parseStudentInfo(char *studentInfoString, int index) {
+Student Students::parseStudentInfo(char *studentInfoString, int index) {
     char buffer[20];
     int idx = 0;
     Student student = Student();
@@ -121,7 +228,7 @@ void Students::generateMockStudent(int studentCount) {
         }
         nameTemp[randNumTemp] = '\0';
 
-        students[i].num = i + 1;
+        students[i].num = i;
         charPointerCopy(students[i].name, nameTemp);
         students[i].score = rand() % 100;
     }
@@ -136,73 +243,44 @@ void Students::readDB(char *name) {
     int index = 0;
     char currentLine[30];
     while (fgets(currentLine, sizeof(currentLine), file) != NULL) {
-        students[index] = parseStudentInfo(currentLine, index + 1);
-        printf("%d %s %d\n", students[index].num, students[index].name, students[index].score);
+        students[index] = parseStudentInfo(currentLine, index);
         index++;
     }
 
     fclose(file);
 }
 
-void Students::insertSortByScore() {
+void Students::sortByScore() {
     Student temp;
     for (int i = 1; i < studentSize; i++) {
         temp = students[i];
-        for (int j = i - 1; j >= 0; j--) {
+
+        int j = i - 1;
+        for (; j >= 0; j--) {
             if (students[j].score > temp.score) {
                 students[j + 1] = students[j];
                 continue;
             }
-            students[j + 1] = temp;
             break;
         }
-    }
-
-    for (int i = 0; i < studentSize; i++) {
-        printf("%d,%s,%d\n", students[i].num, students[i].name, students[i].score);
+        students[j + 1] = temp;
     }
 }
 
-// 왼쪽이 더 크면 true
-bool compareToName(char *left, char *right) {
-    int index = 0;
-    while (index < 8) {
-        if (left[index] == '\0') {
-            return true;
-        }
-
-        if (right[index] == '\0') {
-            return false;
-        }
-
-        if (left[index] > right[index]) {
-            return true;
-        } else if (left[index] < right[index]) {
-            return false;
-        }
-
-        index++;
-    }
-
-    return false;
-}
-
-void Students::insertSortByName() {
+void Students::sortByName() {
     Student temp;
     for (int i = 1; i < studentSize; i++) {
         temp = students[i];
-        for (int j = i - 1; j >= 0; j--) {
+
+        int j = i - 1;
+        for (; j >= 0; j--) {
             if (compareToName(students[j].name, temp.name)) {
                 students[j + 1] = students[j];
                 continue;
             }
-            students[j + 1] = temp;
             break;
         }
-    }
-
-    for (int i = 0; i < studentSize; i++) {
-        printf("%d,%s,%d\n", students[i].num, students[i].name, students[i].score);
+        students[j + 1] = temp;
     }
 }
 
@@ -210,29 +288,66 @@ void Students::printStudentsInfo() {
     for (int i = 0; i < studentSize; i++) {
         printf("%d,%s,%d\n", students[i].num, students[i].name, students[i].score);
     }
+    printf("\n");
 }
 
 
 
 int main() {
-//    setlocale(LC_ALL, "");
-
-//    FILE *file;
-//    file = fopen("hw1db.txt", "wt");
-//    if (file == NULL) {
-//        printf("file open error %s\n", "hw1db.txt");
-//        exit(-1);
-//    }
-//    Student *student = new Student({
-//            1, "jinho", 00
-//    });
-//
-//    fprintf(file, "%s %d", student->name, student->score);
-//    fclose(file);
-
     Students students = Students();
     students.readDB(FILE_NAME_STRING);
-    students.readDB(FILE_NAME_STRING);
+
+    char command[20];
+    int indexBuffer, scoreBuffer;
+    char nameBuffer[20];
+
+    while (1) {
+        scanf("%s", &command);
+        if (equals(command, "insert")) {
+            scanf("%d %s %d", &indexBuffer, &nameBuffer, &scoreBuffer);
+            students.insertRecord(indexBuffer, nameBuffer, scoreBuffer);
+        } else if (equals(command, "delete")) {
+            scanf("%s", &nameBuffer);
+            students.deleteByName(nameBuffer);
+        } else if (equals(command, "list ")) {
+            scanf("%s", &nameBuffer);
+            students.listByName(nameBuffer);
+        } else if (equals(command, "sort name")) {
+            students.sortByName();
+        } else if (equals(command, "sort score")) {
+            students.sortByScore();
+        } else if (equals(command, "read")) {
+            scanf("%s", &nameBuffer);
+            students.readDB(nameBuffer);
+        } else if (equals(command, "write")) {
+            scanf("%s", &nameBuffer);
+            students.writeDB(nameBuffer);
+        } else if (equals(command, "print")) {
+            students.printStudentsInfo();
+        } else if (equals(command, "exit")) {
+            break;
+        } else {
+            printf("there is no command like that\n");
+        }
+    }
+
+
+//    students.printStudentsInfo();
+//
+//    students.sortByName();
+//    students.printStudentsInfo();
+//
+//    students.sortByScore();
+//    students.printStudentsInfo();
+
+    /* insert, delete, list
+    students.insertRecord(0, "oneone", 11);
+    students.insertRecord(0, "twotwo", 12);
+    students.insertRecord(0, "threethree", 13);
     students.printStudentsInfo();
-    students.readDB(FILE_NAME_STRING);
+
+    students.deleteByName("twotwo");
+    students.printStudentsInfo();
+
+    students.listByName("oneone"); */
 }
