@@ -1,1 +1,5 @@
-# [공부 내용 저장소 바로가기](https://github.com/binary-ho/TIL-public/tree/main/3%ED%95%99%EB%85%84%202%ED%95%99%EA%B8%B0/DB)
+# 윤영 교수님의 Database Systems
+단순히 수업 내용만 정리하는게 아니라, Database Systems를 제대로 이해하기 위한 공부를 하자.
+
+## Reference
+- Database Management Systems \<Raghu Ramkrishnan 저>
