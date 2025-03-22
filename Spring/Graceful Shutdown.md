@@ -22,7 +22,8 @@
 ![image](https://github.com/user-attachments/assets/df5e07f1-a74f-4734-ac61-c08e29de41b4)
 
 
-- WebServerManger나, WebServerGracefulShutdownLifecycle에서 shutdowngracefully 호출
+- WebServerManger가 GracefulShutdown 객체 가지고 있음. shutdowngracefully 호출
+- WebServerGracefulShutdownLifecycle 에서도 호출함
 
 ```java
 public class TomcatWebServer implements WebServer {
@@ -31,14 +32,6 @@ public class TomcatWebServer implements WebServer {
 
 	private final GracefulShutdown gracefulShutdown;
 
-	public TomcatWebServer(Tomcat tomcat, boolean autoStart, Shutdown shutdown) {
-		Assert.notNull(tomcat, "Tomcat Server must not be null");
-		this.tomcat = tomcat;
-		this.autoStart = autoStart;
-		this.gracefulShutdown = (shutdown == Shutdown.GRACEFUL) ? new GracefulShutdown(tomcat) : null;
-		initialize();
-	}
-	
 	/**
 	 * Initiates a graceful shutdown of the Tomcat web server. Handling of new requests is
 	 * prevented and the given {@code callback} is invoked at the end of the attempt. The
@@ -57,6 +50,8 @@ public class TomcatWebServer implements WebServer {
 	}
 ```
 
+<br>
+
 - GracefullShutdown 객체의 함수를 호출한다.
 - shutdown 시도
 
@@ -74,7 +69,16 @@ public class TomcatWebServer implements WebServer {
 	}
 ```
 
+<br>
+
 - doShutdown을 호출
+
+1. 커넥터 리스트를 전부 가져온다.
+2. 커넥터 전부 close
+3. isActive && GracefulShutdown 객체 aborted false인 동안 대기한다.
+	- 처리중인 비동기 요청이 있거나, Servlet이 처리중인 요청이 있으면 Active
+4. shutdown 완료
+
 
 ```java
 	private void doShutdown(GracefulShutdownCallback callback, CountDownLatch shutdownUnderway) {
@@ -135,6 +139,10 @@ public class TomcatWebServer implements WebServer {
 void closeServerSocketGraceful();
 ```
 
+<br>
+
+## 1.3 awaitInactiveOrAborted
+
 - awaitInactiveOrAborted: inactive나 aborted를 기다린다.
 - aborted가 아니고, active인 동안 대기
 
@@ -187,7 +195,7 @@ void closeServerSocketGraceful();
 
 <br>
 
-## 1.3 Active 판단 기준은?
+## 1.4 Active 판단 기준은?
 
 - `getInProgressAsyncCount()`: 처리중인 비동기 요청이 있으면 Active
 - `getCountAllocated()` Servlet이 처리중인 요청이 있으면? Active
@@ -213,7 +221,7 @@ void closeServerSocketGraceful();
 
 <br>
 
-## 1.4 요약
+## 1.5 요약
 
 1. Tomcat에서 연결 스레드 세고 있음
 2. WebServerManger나, WebServerGracefulShutdownLifecycle에서 `shutdowngracefully()` 호출로 시작
