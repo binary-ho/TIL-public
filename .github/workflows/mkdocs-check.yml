@@ -1,0 +1,81 @@
+name: MkDocs 검증 및 파일명 문제 자동 해결
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+    # 수동으로 워크플로우 실행 가능
+
+jobs:
+  check-and-fix:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      
+      - name: Python 설정
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+          
+      - name: 의존성 설치
+        run: |
+          python -m pip install --upgrade pip
+          pip install mkdocs mkdocs-material mkdocs-awesome-pages-plugin pyyaml
+      
+      - name: logs 디렉토리 생성
+        run: mkdir -p docs/logs
+      
+      - name: 파일명 끝 공백 문제 수정
+        id: fix-filename-edge-cases
+        run: |
+          echo "파일명 끝 공백 문제 수정 중..."
+          python docs/fix_filename_edge_cases.py --root-dir . --log-dir docs/logs
+          echo "FILES_FIXED=true" >> $GITHUB_ENV
+      
+      - name: MkDocs Nav 설정 업데이트
+        id: fix-nav
+        run: |
+          echo "MkDocs Nav 설정 업데이트 중..."
+          # 업데이트된 config 파일 경로 지정
+          python docs/fix_mkdocs_nav.py --root-dir . --config docs/mkdocs.yml --log-dir docs/logs
+          echo "NAV_UPDATED=true" >> $GITHUB_ENV
+      
+      - name: MkDocs 빌드 테스트
+        run: |
+          echo "MkDocs 빌드 테스트 중..."
+          mkdocs build -f docs/mkdocs.yml
+          echo "BUILD_SUCCESS=true" >> $GITHUB_ENV
+      
+      - name: 로그 업로드
+        uses: actions/upload-artifact@v3
+        with:
+          name: mkdocs-logs
+          path: docs/logs/
+      
+      - name: 변경사항 커밋 (있는 경우)
+        if: env.FILES_FIXED == 'true' || env.NAV_UPDATED == 'true'
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          
+          # 변경된 파일 확인
+          git add -A
+          
+          # 변경사항이 있는지 확인
+          if git diff --staged --quiet; then
+            echo "커밋할 변경사항이 없습니다."
+          else
+            git commit -m "자동: MkDocs 호환성 문제 해결" -a
+            git push
+          fi
+      
+      - name: 성공 메시지
+        if: env.BUILD_SUCCESS == 'true'
+        run: |
+          echo "성공: MkDocs 빌드가 잘 작동합니다!"
+          echo "파일명 문제와 nav 설정이 업데이트되었습니다."
