@@ -38,7 +38,17 @@
         mode: 'hash',
         hashChange: true
       },
-      basePath: '/TIL-public/'
+      basePath: '/TIL-public/',
+      // alias 설정 추가 - 경로 문제 해결
+      alias: {
+        '/.*/_sidebar.md': '/_sidebar.md'
+      },
+      // 상대 경로 설정 활성화
+      relativePath: true,
+      // 파일 이름 처리 방식 변경
+      nameLink: '/',
+      // 404 페이지 처리
+      notFoundPage: true
     }
   </script>
   <!-- Docsify v4 -->
