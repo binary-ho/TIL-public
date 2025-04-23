@@ -1,0 +1,45 @@
+name: 사이드바 자동 업데이트
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - '**/*.md'
+      - '!_sidebar.md'
+      - '!README.md'
+
+jobs:
+  update-sidebar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 저장소 체크아웃
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      
+      - name: Python 설정
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+      
+      - name: 필요한 패키지 설치
+        run: |
+          python -m pip install --upgrade pip
+      
+      - name: 사이드바 생성
+        run: |
+          python scripts/generate_sidebar.py
+      
+      - name: 변경사항 확인
+        id: check_changes
+        run: |
+          git diff --quiet _sidebar.md || echo "::set-output name=changed::true"
+      
+      - name: 변경사항 커밋
+        if: steps.check_changes.outputs.changed == 'true'
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add _sidebar.md
+          git commit -m "[자동] 사이드바 업데이트" -a
+          git push
