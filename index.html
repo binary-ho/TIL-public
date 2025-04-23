@@ -11,6 +11,11 @@
 <body>
   <div id="app"></div>
   <script>
+    // URL 경로 변환 함수 (backslash를 forward slash로 변환)
+    function normalizeURL(url) {
+      return url.replace(/\\/g, '/');
+    }
+
     window.$docsify = {
       name: 'binary-ho TIL',
       repo: 'binary-ho/TIL-public',
@@ -39,16 +44,20 @@
         hashChange: true
       },
       basePath: '/TIL-public/',
-      // alias 설정 추가 - 경로 문제 해결
+      
+      // 경로 정규화 플러그인 추가
+      plugins: [
+        function(hook, vm) {
+          hook.beforeEach(function(content) {
+            return content.replace(/\\/g, '/');
+          });
+        }
+      ],
+      
+      // alias 설정 추가
       alias: {
         '/.*/_sidebar.md': '/_sidebar.md'
-      },
-      // 상대 경로 설정 활성화
-      relativePath: true,
-      // 파일 이름 처리 방식 변경
-      nameLink: '/',
-      // 404 페이지 처리
-      notFoundPage: true
+      }
     }
   </script>
   <!-- Docsify v4 -->
