@@ -64,6 +64,7 @@ def url_encode_path(path):
     """
     URL에서 사용하기 위해 경로를 인코딩합니다.
     공백과 특수문자를 처리합니다.
+    백슬래시(\)를 포워드 슬래시(/)로 변환합니다.
     
     Args:
         path (str): 인코딩할 경로
@@ -71,9 +72,12 @@ def url_encode_path(path):
     Returns:
         str: 인코딩된 경로
     """
+    # 백슬래시를 슬래시로 변환
+    path = path.replace('\\', '/')
+    
     # 경로 구성요소를 개별적으로 인코딩
     parts = path.split('/')
-    encoded_parts = [urllib.parse.quote(part) for part in parts]
+    encoded_parts = [urllib.parse.quote(part, safe='') for part in parts]
     return '/'.join(encoded_parts)
 
 def extract_title(file_path, root_dir):

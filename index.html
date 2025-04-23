@@ -48,16 +48,33 @@
       // 경로 정규화 플러그인 추가
       plugins: [
         function(hook, vm) {
+          // 링크 처리를 위한 플러그인
           hook.beforeEach(function(content) {
+            // 백슬래시를 포워드 슬래시로 변환
             return content.replace(/\\/g, '/');
+          });
+
+          // 모든 URL 처리를 위한 플러그인
+          hook.doneEach(function() {
+            // 현재 창의 URL이 백슬래시를 포함하는지 확인
+            var currentUrl = window.location.hash;
+            if (currentUrl.includes('%5C')) {
+              // 백슬래시(\ -> %5C)를 포워드 슬래시(/)로 변환
+              var correctedUrl = currentUrl.replace(/%5C/g, '/');
+              window.location.hash = correctedUrl;
+            }
           });
         }
       ],
       
       // alias 설정 추가
       alias: {
+        '/.*/.*/_sidebar.md': '/_sidebar.md',
         '/.*/_sidebar.md': '/_sidebar.md'
-      }
+      },
+      
+      // 상대경로 사용 활성화
+      relativePath: true
     }
   </script>
   <!-- Docsify v4 -->
