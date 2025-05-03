@@ -369,6 +369,7 @@
   * [www,google,com입력 발표 추가 자료](/Web/www%2Cgoogle%2Ccom%EC%9E%85%EB%A0%A5%20%EB%B0%9C%ED%91%9C%20%EC%B6%94%EA%B0%80%20%EC%9E%90%EB%A3%8C.md)
 * **caching**
   * [CDN을 위한 웹 캐싱](/caching/CDN%EC%9D%84%20%EC%9C%84%ED%95%9C%20%EC%9B%B9%20%EC%BA%90%EC%8A%81.md)
+  * [Redis ZSET Internal](/caching/Redis%20ZSET%20Internal.md)
   * [Redis 캐싱시 주의할 점들 + Cache Stempede 문제 해결의 다양한 방법들](/caching/Redis%20%EC%BA%90%EC%8B%B1%EC%8B%9C%20%EC%A3%BC%EC%9D%98%ED%95%A0%20%EC%A0%90%EB%93%A4%20%2B%20Cache%20Stempede%20%EB%AC%B8%EC%A0%9C%20%ED%95%B4%EA%B2%B0%EC%9D%98%20%EB%8B%A4%EC%96%91%ED%95%9C%20%EB%B0%A9%EB%B2%95%EB%93%A4.md)
   * [분산 이질형 객체 환경에서 캐싱 알고리즘의 설계 및 성능 분석 <반효경>](/caching/%EB%B6%84%EC%82%B0%20%EC%9D%B4%EC%A7%88%ED%98%95%20%EA%B0%9D%EC%B2%B4%20%ED%99%98%EA%B2%BD%EC%97%90%EC%84%9C%20%EC%BA%90%EC%8B%B1%20%28temp%29.md)
 * **deployment**
