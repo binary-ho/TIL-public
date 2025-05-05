@@ -11,6 +11,7 @@
       * [Scroll View](/Android/%5B%EC%B1%85%5D%20Do%20it%20%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C%20%EC%95%B1%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/1.%20Layout/Scroll%20View.md)
 * **Architecture**
   * [채팅 시스템 설계](/Architecture/%5BArchitecture%5D%20%EC%B1%84%ED%8C%85%20%EC%8B%9C%EC%8A%A4%ED%85%9C%20%EC%84%A4%EA%B3%84.md)
+  * [이벤트 스트리밍 플랫폼 쓰는 이유?](/Architecture/%EB%B6%84%EC%82%B0%20%EB%A9%94%EC%8B%9C%EC%A7%80%20%ED%81%90.md)
   * [테스트와 아키텍처](/Architecture/%ED%85%8C%EC%8A%A4%ED%8A%B8%EC%99%80%20%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98.md)
 * **Batch**
   * [EnableProcessing과 Mata Data](/Batch/EnableProcessing%EA%B3%BC%20Mata%20Data.md)
