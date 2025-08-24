@@ -405,6 +405,8 @@
   * [결제 요청, 인증, 승인, 멱등성](/payment/%EA%B2%B0%EC%A0%9C%20%EC%9A%94%EC%B2%AD%2C%20%EC%9D%B8%EC%A6%9D%2C%20%EC%8A%B9%EC%9D%B8%2C%20%EB%A9%B1%EB%93%B1%EC%84%B1%20%EC%95%84%ED%8B%B0%ED%81%B4%20%EC%9A%94%EC%95%BD.md)
 * **records**
   * [사용자 프로필 사진 불러오는 로직 백앤드에서 실행하기](/records/%5B220820%5D%20%ED%94%84%EB%A1%A0%ED%8A%B8%20%EB%A1%9C%EC%A7%81%EC%9D%84%20%EB%B0%B1%EC%95%A4%EB%93%9C%EC%97%90%EC%84%9C%20%EC%8B%A4%ED%96%89%ED%95%98%EB%8F%84%EB%A1%9D%20%EB%B0%94%EA%BE%B8%EC%96%B4%EC%84%9C%20%EC%84%B1%EB%8A%A5%20%EA%B0%9C%EC%84%A0%ED%95%A8.md)
+* **yorkie**
+  * [HouseKeeping - Document Compaction](/yorkie/HouseKeeping%20-%20Document%20Compaction.md)
 * **금융 도메인**
   * [주의 - 도메인지식이라 도움이 안 될 수 있음. 읽지 않는것 권장](/%EA%B8%88%EC%9C%B5%20%EB%8F%84%EB%A9%94%EC%9D%B8/%EB%B3%B4%ED%97%98%EC%A6%9D%EA%B6%8C%EA%B3%BC%20%EC%8B%AC%EC%82%AC%20%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4.md)
 * **도메인 주도 개발 시작하기**
